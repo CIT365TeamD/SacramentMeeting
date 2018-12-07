@@ -1,0 +1,51 @@
+﻿@page
+@model SacramentMeeting.Pages.Callings.IndexModel
+
+@{
+    ViewData["Title"] = "Callings";
+}
+
+<h2>Callings</h2>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Calling[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Calling[0].Organization)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Calling[0].CurrentCallings)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Calling) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Organization)
+            </td>
+            <td>
+                @foreach (var i in item.CurrentCallings)
+                {
+                    @Html.DisplayFor(modelItem => i.Member.FullName)<br />
+                }
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.CallingID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.CallingID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.CallingID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
