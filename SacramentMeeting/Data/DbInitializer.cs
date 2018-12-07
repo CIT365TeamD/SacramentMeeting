@@ -110,10 +110,10 @@ namespace SacramentMeeting.Data
 
             var meetings = new Meeting[]
             {
-                new Meeting{MeetingDate=DateTime.Parse("2019=12-9"),CallingID=1},
-                new Meeting{MeetingDate=DateTime.Parse("2019=12-16"),CallingID=1},
-                new Meeting{MeetingDate=DateTime.Parse("2019=12-23"),CallingID=1},
-                new Meeting{MeetingDate=DateTime.Parse("2019=12-30"),CallingID=1},
+                new Meeting{MeetingDate=DateTime.Parse("2019-12-9"),CallingID=1},
+                new Meeting{MeetingDate=DateTime.Parse("2019-12-16"),CallingID=1},
+                new Meeting{MeetingDate=DateTime.Parse("2019-12-23"),CallingID=1},
+                new Meeting{MeetingDate=DateTime.Parse("2019-12-30"),CallingID=1},
             };
             foreach (Meeting m in meetings)
             {

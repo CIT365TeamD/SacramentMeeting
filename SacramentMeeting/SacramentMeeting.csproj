@@ -19,6 +19,8 @@
 
   <ItemGroup>
     <Folder Include="Models\SacramentViewModels\" />
+    <Folder Include="Pages\Prayers\" />
+    <Folder Include="Pages\Talks\" />
   </ItemGroup>
 
 </Project>
