@@ -22,6 +22,17 @@ namespace SacramentMeeting.Models
         public DbSet<SacramentMeeting.Models.CurrentCalling> CurrentCalling { get; set; }
         public DbSet<SacramentMeeting.Models.SongSelection> SongSelection { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Meeting>()
+                .HasIndex(m => m.MeetingDate)
+                .IsUnique();
 
+            builder.Entity<Member>()
+                .HasIndex(m => new { m.FirstName, m.LastName })
+                .IsUnique();
+
+            
+        }
     }
 }

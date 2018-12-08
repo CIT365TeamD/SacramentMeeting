@@ -2,12 +2,12 @@
 @model SacramentMeeting.Pages.Meetings.CreateModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create Meeting";
 }
 
 <h2>Create</h2>
 
-<h4>Meeting</h4>
+<h4>Sacrament Meeting</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -19,9 +19,30 @@
                 <span asp-validation-for="Meeting.MeetingDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Meeting.CallingID" class="control-label"></label>
-                <select asp-for="Meeting.CallingID" class ="form-control" asp-items="ViewBag.CallingID"></select>
+                <label asp-for="Meeting.Calling.Title" class="control-label"></label>
+                <select asp-for="Meeting.CallingID" class="form-control" asp-items="@Model.BishopricCallingsSL"></select>
             </div>
+            <div class="form-group">
+                <label for="OpeningPrayer" class="control-label">Opening Prayer</label>
+                <select name="OpeningPrayer" class="form-control" asp-items="@Model.MemberSL"></select>
+            </div>
+            <div class="form-group">
+                <label for="closingPrayer" class="control-label">Closing Prayer</label>
+                <select name="closingPrayer" class="form-control" asp-items="@Model.MemberSL"></select>
+            </div>
+            <div class="form-group">
+                <label for="openingSong" class="control-label">Opening Song</label>
+                <select name="openingSong" class="form-control" asp-items="@Model.SongsSL"></select>
+            </div>
+            <div class="form-group">
+                <label for="sacramentSong" class="control-label">Sacrament Song</label>
+                <select name="sacramentSong" class="form-control" asp-items="@Model.SacramentSongsSL"></select>
+            </div>
+            <div class="form-group">
+                <label for="closingSong" class="control-label">Closing Song</label>
+                <select name="closingSong" class="form-control" asp-items="@Model.SongsSL"></select>
+            </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>

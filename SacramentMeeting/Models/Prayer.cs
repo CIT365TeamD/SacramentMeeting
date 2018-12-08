@@ -14,10 +14,12 @@ namespace SacramentMeeting.Models
     public class Prayer
     {
         public int PrayerID { get; set; }
+
+
         public int MemberID { get; set; }
         public int MeetingID { get; set; }
 
-        [Required]
+        //[Required]
         public PrayerPosition Schedule { get; set; }
 
         public Member Member { get; set; }

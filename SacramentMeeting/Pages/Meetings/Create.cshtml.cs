@@ -9,7 +9,8 @@ using SacramentMeeting.Models;
 
 namespace SacramentMeeting.Pages.Meetings
 {
-    public class CreateModel : PageModel
+    [BindProperties]
+    public class CreateModel : MeetingPrayersPageModel
     {
         private readonly SacramentMeeting.Models.SacramentMeetingContext _context;
 
@@ -20,12 +21,28 @@ namespace SacramentMeeting.Pages.Meetings
 
         public IActionResult OnGet()
         {
-        ViewData["CallingID"] = new SelectList(_context.Calling, "CallingID", "Title");
+            var meeting = new Meeting
+            {
+                Prayers = new List<Prayer>()
+            };
+            PopulateAssignedMemberPrayerData(_context, meeting);
+            PopulateBishopricDropdownList(_context);
+            PopulateMemberDropDownList(_context);
+            PopulateSacramentSongsSL(_context);
+            PopulateSongsDropdownList(_context);
+            
             return Page();
+            
+            
         }
 
-        [BindProperty]
+        
         public Meeting Meeting { get; set; }
+        public string OpeningPrayer { get; set; }
+        public string ClosingPrayer { get; set; }
+        public string OpeningSong { get; set; }
+        public string SacramentSong { get; set; }
+        public string ClosingSong { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -34,9 +51,80 @@ namespace SacramentMeeting.Pages.Meetings
                 return Page();
             }
 
-            _context.Meeting.Add(Meeting);
-            await _context.SaveChangesAsync();
+            var newMeeting = new Meeting();
+            // Add prayers
+            if (OpeningPrayer != null || ClosingPrayer != null)
+            {
+                newMeeting.Prayers = new List<Prayer>();
+                if (OpeningPrayer != null)
+                {
+                    var prayerToAddO = new Prayer
+                    {
+                        MemberID = int.Parse(OpeningPrayer),
+                        Schedule = PrayerPosition.Opening
+                    };
+                    newMeeting.Prayers.Add(prayerToAddO);
+                }
+                if (ClosingPrayer != null)
+                {
+                    var prayerToAddC = new Prayer
+                    {
+                        MemberID = int.Parse(ClosingPrayer),
+                        Schedule = PrayerPosition.Closing
+                    };
+                    newMeeting.Prayers.Add(prayerToAddC);
+                }
+            }
 
+            // add songs
+            if (OpeningSong != null || SacramentSong != null || ClosingSong != null)
+            {
+                newMeeting.SongSelections = new List<SongSelection>();
+                if (OpeningSong != null)
+                {
+                    var songToAddO = new SongSelection
+                    {
+                        SongID = int.Parse(OpeningSong),
+                        Schedule = SongPosition.Opening
+                    };
+                    newMeeting.SongSelections.Add(songToAddO);
+                }
+                if (SacramentSong != null)
+                {
+                    var songToAddS = new SongSelection
+                    {
+                        SongID = int.Parse(SacramentSong),
+                        Schedule = SongPosition.Sacrament
+                    };
+                    newMeeting.SongSelections.Add(songToAddS);
+                }
+                if (ClosingSong != null)
+                {
+                    var songToAddC = new SongSelection
+                    {
+                        SongID = int.Parse(ClosingSong),
+                        Schedule = SongPosition.Closing
+                    };
+                    newMeeting.SongSelections.Add(songToAddC);
+                }
+            }        
+            if (await TryUpdateModelAsync<Meeting>(
+                newMeeting,
+                "Meeting",
+                i => i.MeetingDate,
+                i => i.CallingID))
+            {
+                _context.Meeting.Add(newMeeting);
+                await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
+            }
+
+            PopulateAssignedMemberPrayerData(_context, newMeeting);
+            PopulateBishopricDropdownList(_context);
+            PopulateMemberDropDownList(_context);
+            PopulateMemberDropDownList(_context);
+            PopulateSacramentSongsSL(_context);
+            PopulateSongsDropdownList(_context);
             return RedirectToPage("./Index");
         }
     }
