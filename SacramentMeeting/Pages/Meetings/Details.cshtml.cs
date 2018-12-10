@@ -31,6 +31,8 @@ namespace SacramentMeeting.Pages.Meetings
                 .Include(m => m.Calling)
                 .Include(s => s.SongSelections)
                 .ThenInclude(ss => ss.Song)
+                .Include(e => e.Prayers)
+                .ThenInclude(ee => ee.Member)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.MeetingID == id);
 
