@@ -9,7 +9,7 @@ namespace SacramentMeeting.Models
 {
     public class Song
     { 
-    
+        [Display (Name = "Song Number")]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int SongID { get; set; }
 

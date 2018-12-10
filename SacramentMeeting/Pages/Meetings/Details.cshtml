@@ -27,7 +27,26 @@
             @Html.DisplayNameFor(model => model.Meeting.Prayers)
         </dt>
         <dd>
-            
+            @Html.DisplayFor(model => model.Meeting.Prayers)
+        </dd>
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Song Title</th>
+                    <th>Schedule</th>
+                </tr>
+                @foreach (var item in Model.Meeting.SongSelections)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Song.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Schedule)
+                        </td>
+                    </tr>
+                }
+            </table>
         </dd>
     </dl>
 </div>

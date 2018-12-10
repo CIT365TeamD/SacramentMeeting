@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using SacramentMeeting.Models;
 
-namespace SacramentMeeting.Pages.Meetings
+namespace SacramentMeeting.Pages.Songs
 {
     public class DetailsModel : PageModel
     {
@@ -18,7 +18,7 @@ namespace SacramentMeeting.Pages.Meetings
             _context = context;
         }
 
-        public Meeting Meeting { get; set; }
+        public Song Song { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -27,14 +27,13 @@ namespace SacramentMeeting.Pages.Meetings
                 return NotFound();
             }
 
-            Meeting = await _context.Meeting
-                .Include(m => m.Calling)
+            Song = await _context.Song
                 .Include(s => s.SongSelections)
-                .ThenInclude(ss => ss.Song)
+                .ThenInclude(ss => ss.Meeting)
                 .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.MeetingID == id);
+                .FirstOrDefaultAsync(m => m.SongID == id);
 
-            if (Meeting == null)
+            if (Song == null)
             {
                 return NotFound();
             }

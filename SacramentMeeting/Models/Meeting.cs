@@ -20,6 +20,8 @@ namespace SacramentMeeting.Models
         [Display(Name ="Conducting")]
         public Calling Calling { get; set; }
 
+        
+        
         public ICollection<Prayer> Prayers { get; set; }
         public ICollection<Talk> Talks { get; set; }
         public ICollection<SongSelection> SongSelections { get; set; }
