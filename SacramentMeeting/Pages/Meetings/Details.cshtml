@@ -21,14 +21,39 @@
             @Html.DisplayNameFor(model => model.Meeting.Calling)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Meeting.Calling.Title)
+            @Html.DisplayFor(model => model.Meeting.Calling.Title) 
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Meeting.Prayers)
         </dt>
-        <dd>
-            
-        </dd>
+        
+            @foreach (var item in Model.Meeting.Prayers)
+            {
+                <dd>
+                    @item.Schedule Prayer: @item.Member.FullName<br />
+                    </dd>
+                    
+            }
+        <dt>
+            @Html.DisplayNameFor(model => model.Meeting.Talks)
+        </dt>
+        @foreach (var item in Model.Meeting.Talks)
+        {
+            <dd>
+                @item.Member.FullName - Topic: @item.Topic
+            </dd>
+        }
+        <dt>
+            @Html.DisplayNameFor(model => model.Meeting.SongSelections)
+        </dt>
+        @foreach (var item in Model.Meeting.SongSelections)
+        {
+            <dd>
+                @item.Schedule Song: #@item.SongID @item.Song.Title
+            </dd>
+        }
+        
+        
     </dl>
 </div>
 <div>

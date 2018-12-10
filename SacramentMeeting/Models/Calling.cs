@@ -32,6 +32,6 @@ namespace SacramentMeeting.Models
 
         [Display(Name = "Current Callings")]
         public ICollection<CurrentCalling> CurrentCallings { get; set; }
-        public ICollection<Meeting> Meetings { get; set; }
+        
     }
 }

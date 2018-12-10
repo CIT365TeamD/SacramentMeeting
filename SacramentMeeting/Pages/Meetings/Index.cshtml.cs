@@ -23,7 +23,8 @@ namespace SacramentMeeting.Pages.Meetings
         public async Task OnGetAsync()
         {
             Meeting = await _context.Meeting
-                .Include(m => m.Calling).ToListAsync();
+                .Include(m => m.Calling)
+                .ToListAsync();
         }
     }
 }

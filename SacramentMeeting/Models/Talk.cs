@@ -11,12 +11,11 @@ namespace SacramentMeeting.Models
         public int MeetingID { get; set; }
         public int MemberID { get; set; }
 
-        [Required,
-            StringLength(250, MinimumLength = 2, ErrorMessage = "Topic must be 2-250 characters."),
-            RegularExpression(@"^[A-Z]+[a-zA-Z""'.,\s-]*$")]
+        [StringLength(250, MinimumLength = 2, ErrorMessage = "Topic must be 2-250 characters."),
+            RegularExpression(@"[a-zA-Z""'.,\s-]*$")]
         public string Topic { get; set; }
 
         public Meeting Meeting { get; set; }
-        public Member Members { get; set; }
+        public Member Member { get; set; }
     }
 }

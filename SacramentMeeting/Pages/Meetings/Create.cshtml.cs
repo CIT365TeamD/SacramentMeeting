@@ -25,7 +25,7 @@ namespace SacramentMeeting.Pages.Meetings
             {
                 Prayers = new List<Prayer>()
             };
-            PopulateAssignedMemberPrayerData(_context, meeting);
+           
             PopulateBishopricDropdownList(_context);
             PopulateMemberDropDownList(_context);
             PopulateSacramentSongsSL(_context);
@@ -43,6 +43,10 @@ namespace SacramentMeeting.Pages.Meetings
         public string OpeningSong { get; set; }
         public string SacramentSong { get; set; }
         public string ClosingSong { get; set; }
+        public string Talk0 { get; set; }
+        public string Talk1 { get; set; }
+        public string Topic0 { get; set; }
+        public string Topic1 { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -107,7 +111,40 @@ namespace SacramentMeeting.Pages.Meetings
                     };
                     newMeeting.SongSelections.Add(songToAddC);
                 }
-            }        
+            }
+            // add talks
+            
+            if (Talk0 != null || Talk1 != null)
+            {
+                newMeeting.Talks = new List<Talk>();
+               
+                if (Talk0 != null)
+                {
+                    var talkToAdd0 = new Talk
+                        {
+                            MemberID = int.Parse(Talk0),  
+                        };
+                    if (Topic0 == null)
+                    {
+                        Topic0 = "";
+                    }
+                    talkToAdd0.Topic = Topic0;
+                    newMeeting.Talks.Add(talkToAdd0);
+                }
+                if (Talk1 != null)
+                {
+                    var talkToAdd1 = new Talk
+                    {
+                        MemberID = int.Parse(Talk1),
+                    };
+                    if (Topic1 == null)
+                    {
+                        Topic1 = ""; 
+                    }
+                    talkToAdd1.Topic = Topic1;
+                    newMeeting.Talks.Add(talkToAdd1);
+                }
+            }
             if (await TryUpdateModelAsync<Meeting>(
                 newMeeting,
                 "Meeting",
@@ -119,7 +156,7 @@ namespace SacramentMeeting.Pages.Meetings
                 return RedirectToPage("./Index");
             }
 
-            PopulateAssignedMemberPrayerData(_context, newMeeting);
+            
             PopulateBishopricDropdownList(_context);
             PopulateMemberDropDownList(_context);
             PopulateMemberDropDownList(_context);

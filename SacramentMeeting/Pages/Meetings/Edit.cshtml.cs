@@ -37,6 +37,8 @@ namespace SacramentMeeting.Pages.Meetings
                 return NotFound();
             }
            ViewData["CallingID"] = new SelectList(_context.Calling, "CallingID", "Title");
+            ViewData["OpeningSong"] = new SelectList(_context.Song, "SongID", "Title");
+            ViewData["ClosingSong"] = new SelectList(_context.Song, "SongID", "Title");
             return Page();
         }
 
