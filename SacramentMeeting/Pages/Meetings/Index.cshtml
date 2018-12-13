@@ -41,8 +41,8 @@
                     @Html.DisplayFor(modelItem => item.MeetingDate)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Calling.Title) - @foreach (var member in item.Calling.CurrentCallings)
-                    { @Html.Display(member.Member.FullName)}
+                    @Html.DisplayFor(modelItem => item.Calling.Title) - @foreach (var person in item.Calling.CurrentCallings)
+                    { @person.Member.FullName}
                 </td>
 
                 <td>

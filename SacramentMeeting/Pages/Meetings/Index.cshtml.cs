@@ -27,8 +27,7 @@ namespace SacramentMeeting.Pages.Meetings
                 .Include(m => m.Calling)
                     .ThenInclude(m => m.CurrentCallings)
                         .ThenInclude(m => m.Member)
-                            .ThenInclude(m => m.FullName)
-                        .OrderBy(m => m.MeetingDate)
+                           .OrderBy(m => m.MeetingDate)
                 .ToListAsync();
         }
     }

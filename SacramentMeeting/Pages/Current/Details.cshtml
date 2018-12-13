@@ -1,0 +1,37 @@
+﻿@page
+@model SacramentMeeting.Pages.Current.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Current Calling</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrentCalling.DateCalled)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CurrentCalling.DateCalled)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrentCalling.Calling)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CurrentCalling.Calling.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrentCalling.Member)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CurrentCalling.Member.FullName)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.CurrentCalling.CurrentCallingID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
