@@ -2,14 +2,24 @@
 @model SacramentMeeting.Pages.Meetings.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Meetings";
 }
 
-<h2>Index</h2>
+<h2>Sacrament Meetings</h2>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create">Create New Meeting</a>
 </p>
+<!--<form asp-page="./Index" method="get">
+<div class="form-actions no-color">
+    <p>
+        Find by year:
+        <input type="number" min="2000" max="9999" name="SearchString" value="@(DateTime.Now.Year)" />
+        <input type="submit" name="submit" value="Search" class="btn btn-default" />
+        <a class="a2" asp-page="./Index">Back to full list</a>
+    </p>
+</div>
+</form>-->
 <table class="table">
     <thead>
         <tr>
@@ -19,26 +29,28 @@
             <th>
                 @Html.DisplayNameFor(model => model.Meeting[0].Calling)
             </th>
-            
+
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Meeting) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MeetingDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Calling.Title)
-            </td>
-            
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.MeetingID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.MeetingID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.MeetingID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Meeting)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MeetingDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Calling.Title) - @foreach (var member in item.Calling.CurrentCallings)
+                    { @Html.Display(member.Member.FullName)}
+                </td>
+
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.MeetingID">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.MeetingID">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.MeetingID">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

@@ -1,7 +1,6 @@
 ﻿using SacramentMeeting.Data;
 using SacramentMeeting.Pages;
 using SacramentMeeting.Models;
-using SacramentMeeting.Models.SacramentViewModels;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -12,44 +11,235 @@ namespace SacramentMeeting.Pages.Meetings
 {
     public class MeetingPrayersPageModel : PageModel
     {
-        public SelectList OpeningPrayerSL { get; set; }
-        public SelectList ClosingPrayerSL { get; set; }
-        public SelectList Talk0SL { get; set; }
-        public SelectList Talk1SL { get; set; }
-        public SelectList Talk2SL { get; set; }
-        public SelectList MemberSL { get; set; }
+        public List<SelectListItem> OpeningPrayerSLI { get; set; }
+        public List<SelectListItem> ClosingPrayerSLI { get; set; }
         public SelectList BishopricCallingsSL { get; set; }
-        public SelectList OpeningSongSL { get; set; }
-        public SelectList ClosingSongSL { get; set; }
-        public SelectList SacramentSongsSL { get; set; }
+        public List<SelectListItem> ClosingSongSLI { get; set; }
+        public List<SelectListItem> SacramentSongSLI { get; set; }
+        public List<SelectListItem> OpeningSongSLI { get; set; }
 
-        // NOT BEING USED. instantiate list of AssignedMemberPrayerData, which is viewModel. 
-        //List of members assigned to pray
-        public List<AssignedMemberPrayerData> AssignedMemberPrayerDataList;
-
-
-
-        // create dropdown list for members
-        public void PopulateMemberDropDownList(
-            SacramentMeetingContext _context, string openingPrayer = null, string closingPrayer = null, string talk0 = null, string talk1 = null)
+        // Populates all song dropdown lists
+        public void PopulateSongsSLI(SacramentMeetingContext context,
+            Meeting meeting = null)
         {
-            //var membersQuery = from m in _context.Member
-            //select m;
-            IList<Member> members = _context.Member
+            // create a list of all of the songs
+            IList<Song> songs = context.Song
                 .AsNoTracking()
                 .ToList();
-            OpeningPrayerSL = new SelectList(
-                members, "ID", "FullName", openingPrayer);
-            ClosingPrayerSL = new SelectList(
-                members, "ID", "FullName", closingPrayer);
-            Talk0SL = new SelectList(
-                members, "ID", "FullName", talk0);
-            Talk1SL = new SelectList(
-                members, "ID", "FullName", talk1);
+
+            // Get SongID of Opening, Closing, and Sacrament song for this meeting.
+            IEnumerable<int> OpeningSongID = null;
+            IEnumerable<int> ClosingSongID = null;
+            IEnumerable<int> SacramentSongID = null;
+            if (meeting != null)
+            {
+                OpeningSongID = meeting.SongSelections
+                                      .Where(c => c.Schedule == SongPosition.Opening)
+                                      .Select(c => c.SongID);
+
+                ClosingSongID = meeting.SongSelections
+                                       .Where(c => c.Schedule == SongPosition.Closing)
+                                       .Select(c => c.SongID);
+
+                SacramentSongID = meeting.SongSelections
+                                     .Where(c => c.Schedule == SongPosition.Sacrament)
+                                     .Select(c => c.SongID);
+            }
+            // Create List of Select List items. For each song in Song table, create select list item
+
+            OpeningSongSLI = new List<SelectListItem>();
+            {
+
+                if (OpeningSongID != null)
+                {
+                    foreach (Song song in songs)
+                    {
+                        OpeningSongSLI.Add(new SelectListItem
+                        {
+                            Value = song.SongID.ToString(),
+                            Text = song.Display,
+                            // if the songID for the song matches the SongID of the opening song (in OpenSong), Selected will be marked true.
+                            Selected = OpeningSongID.Contains(song.SongID)
+                        });
+                    }
+                }
+                else
+                {
+                    foreach (Song song in songs)
+                    {
+                        OpeningSongSLI.Add(new SelectListItem
+                        {
+                            Value = song.SongID.ToString(),
+                            Text = song.Display,
+                        });
+                    }
+
+                }
+            }
+
+
+
+            // Create List of Select List items. For each song in Song table, create select list item
+            ClosingSongSLI = new List<SelectListItem>();
+            {
+                if (ClosingSongID != null)
+                {
+                    foreach (Song song in songs)
+                    {
+                        ClosingSongSLI.Add(new SelectListItem
+                        {
+                            Value = song.SongID.ToString(),
+                            Text = song.Display,
+                            // if the songID for the song matches the SongID of the closing song (in CloseSong), Selected will be marked true.
+                            Selected = ClosingSongID.Contains(song.SongID)
+                        });
+
+                    }
+                }
+                else
+                {
+                    foreach (Song song in songs)
+                    {
+                        ClosingSongSLI.Add(new SelectListItem
+                        {
+                            Value = song.SongID.ToString(),
+                            Text = song.Display,
+                        });
+
+                    }
+                }
+            }
+
+            // change list to filter for just Sacrament Songs.
+            var sacSongs = songs.Where(s => s.SongID > 168).Where(s => s.SongID < 197);
+
+            // Create List of Select List items. For each song in  sacSongs, create select list item
+            SacramentSongSLI = new List<SelectListItem>();
+            {
+                if (SacramentSongID != null)
+                {
+                    foreach (Song song in sacSongs)
+                    {
+                        SacramentSongSLI.Add(new SelectListItem
+                        {
+                            Value = song.SongID.ToString(),
+                            Text = song.Display,
+                            // if the songID for the song matches the SongID of the sacrament song (in SacSong), Selected will be marked true.
+                            Selected = SacramentSongID.Contains(song.SongID)
+                        });
+
+                    }
+                }
+                else
+                {
+                    foreach (Song song in sacSongs)
+                    {
+                        SacramentSongSLI.Add(new SelectListItem
+                        {
+                            Value = song.SongID.ToString(),
+                            Text = song.Display,
+                        });
+
+                    }
+
+                }
+            }
+
         }
 
+        // create dropdown list for prayers
+        public void PopulatePrayersSLI(SacramentMeetingContext context,
+            Meeting meeting = null)
+        {
+            // create list of all members
+            IList<Member> members = context.Member
+                .AsNoTracking()
+                .ToList();
+            IEnumerable<int> OpeningPrayerID = null;
+            IEnumerable<int> ClosingPrayerID = null;
+            // get ids of opening and closing prayer for meeting
+            if (meeting != null)
+            {
+                OpeningPrayerID = meeting.Prayers
+                            .Where(p => p.MeetingID == meeting.MeetingID)
+                            .Where(p => p.Schedule == PrayerPosition.Opening)
+                            .Select(p => p.MemberID);
+
+                ClosingPrayerID = meeting.Prayers
+                                  .Where(p => p.MeetingID == meeting.MeetingID)
+                                  .Where(p => p.Schedule == PrayerPosition.Closing)
+                                  .Select(p => p.MemberID);
+
+            }
+            // create new select item list
+
+            OpeningPrayerSLI = new List<SelectListItem>();
+            {
+                if (OpeningPrayerID != null)
+                {
+                    foreach (Member member in members)
+                    {
+                        OpeningPrayerSLI.Add(
+                            new SelectListItem
+                            {
+                                Value = member.ID.ToString(),
+                                Text = member.FullName,
+                                Selected = OpeningPrayerID.Contains(member.ID)
+                            });
+                    }
+                }
+                else
+                {
+                    foreach (Member member in members)
+                    {
+                        OpeningPrayerSLI.Add(
+                            new SelectListItem
+                            {
+                                Value = member.ID.ToString(),
+                                Text = member.FullName
+                            });
+                    }
+                }
+
+
+
+                ClosingPrayerSLI = new List<SelectListItem>();
+                {
+                    if (ClosingPrayerID != null)
+                    {
+                        foreach (Member member in members)
+                        {
+                            ClosingPrayerSLI.Add(
+                                new SelectListItem
+                                {
+                                    Value = member.ID.ToString(),
+                                    Text = member.FullName,
+                                    Selected = ClosingPrayerID.Contains(member.ID)
+                                });
+                        }
+
+                    }
+                    else
+                    {
+                        foreach (Member member in members)
+                        {
+                            ClosingPrayerSLI.Add(
+                                new SelectListItem
+                                {
+                                    Value = member.ID.ToString(),
+                                    Text = member.FullName
+                                });
+                        }
+                    }
+
+                }
+            }
+
+        }
+
+
             // create dropdown list for just bishopric
-            public void PopulateBishopricDropdownList(SacramentMeetingContext _context,
+        public void PopulateBishopricSL(SacramentMeetingContext _context,
             object selectedCalling = null)
         {
             var callingsQuery = from c in _context.Calling
@@ -58,100 +248,148 @@ namespace SacramentMeeting.Pages.Meetings
 
             BishopricCallingsSL = new SelectList(callingsQuery.AsNoTracking(),
                 "CallingID", "Title", selectedCalling);
-        }
 
-
-        // create dropdown list of songs
-        public void PopulateSongsDropdownList(SacramentMeetingContext _context,
-            string openingSong = null, string closingSong = null)
-        {
-            //var songsQuery = from s in _context.Song
-            //select s;
-            IList<Song> songs = _context.Song
-                                .AsNoTracking()
-                                .ToList();
-
-            OpeningSongSL = new SelectList(songs,
-                "SongID", "Title", openingSong);
-            ClosingSongSL = new SelectList(songs,
-                "SongID", "Title", closingSong);
-        }
-        public void PopulateSacramentSongsSL(SacramentMeetingContext _context,
-            object selectedSong = null)
-        {
-            var sacSongsQuery = from s in _context.Song
-                                where s.SongID > 168
-                                where s.SongID < 197
-                                select s;
-            SacramentSongsSL = new SelectList(sacSongsQuery.AsNoTracking(),
-                "SongID", "Title", selectedSong);
-        }
-
-        // Update List of prayers for meeting
-        public void UpdateMeetingPrayerMembers(SacramentMeetingContext context,
-            string[] SelectedPrayerMembers, Meeting meetingToUpdate)
-        {
-            if (SelectedPrayerMembers == null)
-            {
-                meetingToUpdate.Prayers = new List<Prayer>();
-                return;
-            }
-
-            var selectedPrayerMembersHS = new HashSet<string>(SelectedPrayerMembers);
-            var meetingPrayerMembers = new HashSet<int>
-                (meetingToUpdate.Prayers.Select(p => p.Member.ID));
-         
-            foreach (var member in context.Member)
-            {
-                if (selectedPrayerMembersHS.Contains(member.ID.ToString()))
-                {
-                    if (!meetingPrayerMembers.Contains(member.ID))
-                    {
-                        meetingToUpdate.Prayers.Add(new Prayer
-                        {
-                            MeetingID = meetingToUpdate.MeetingID,
-                            MemberID = member.ID,
-                            
-                        });
-                    }       
-                }
-                else
-                {
-                    if (meetingPrayerMembers.Contains(member.ID))
-                    {
-                        Prayer prayerToRemove
-                            = meetingToUpdate
-                            .Prayers
-                            .SingleOrDefault(i => i.MemberID == member.ID);
-                        context.Remove(prayerToRemove);
-                    }
-                }
-            }
         }
 
         
 
-        // NOT BEING USED method to populate prayers from meeting. Parameters are context, and meeting
-        public void PopulateAssignedMemberPrayerData(SacramentMeetingContext context,
-            Meeting meeting)
+            // update each song
+            public void UpdateSong(SacramentMeetingContext context, Meeting meetingToUpdate,
+                ICollection<SongSelection> songSelection, SongPosition schedule, string songID = null)
         {
-            // Get whole member Table 
-            var allMembers = context.Member;
-            var MeetingPMembers = new HashSet<int>(
-                meeting.Prayers.Select(p => p.Member.ID));
-            AssignedMemberPrayerDataList = new List<AssignedMemberPrayerData>();
-
-            foreach (var member in allMembers)
+            
+            if (songID == null) // if songID is null, need to delete song if there is one in songPosition.
             {
-                AssignedMemberPrayerDataList.Add(new AssignedMemberPrayerData
+                foreach (var item in songSelection) // check songPosition in songSelections. 
                 {
-                    MemberID = member.ID,
-                    FullName = member.FullName,
-                });
+                    if (item.Schedule.Equals(schedule)) // if there is a song in songPosition, delete it
+                    {
+                        SongSelection songToRemove
+                            = meetingToUpdate
+                            .SongSelections
+                            .SingleOrDefault(i => i.SongID == item.SongID && i.Schedule == schedule);
+                        context.Remove(songToRemove);
+                        songSelection.Remove(songToRemove);
+                        return;
+                    } // if there is no song, do nothing because it is already empty
+                }
             }
+            else // if songID is not empty
+            {
+                int songIDInt = int.Parse(songID); // change songID to int
+                int count = 0; // count to see if songPosition is empty
+                foreach (var item in songSelection) // check each songSelection in meeting for correct songPosition
+                {
+                    if (item.Schedule.Equals(schedule))
+                    {
+                        count++; // there is song in songPosition   
+                        
 
+                        if (songIDInt != item.SongID) // if wrong song is in songPosition
+                        {
+                            SongSelection songToRemove // remove wrong song
+                                = meetingToUpdate
+                                .SongSelections
+                                .SingleOrDefault(i => i.SongID == item.SongID && i.Schedule == schedule);
+                            context.Remove(songToRemove);
+                            songSelection.Remove(songToRemove);
 
+                            meetingToUpdate.SongSelections.Add( // add the correct song
+                                new SongSelection
+                                {
+                                    SongID = songIDInt,
+                                    Schedule = schedule
+                                });
+                            return;
+                        }
+
+                    }
+                   
+                }
+                if (count == 0) // the song position is empty
+                {
+                    meetingToUpdate.SongSelections.Add(
+                        new SongSelection
+                        {
+                            SongID = songIDInt,
+                            Schedule = schedule
+                        });
+                }
+            }
         }
+
+        // update each prayer
+        public void UpdatePrayer(SacramentMeetingContext context, Meeting meetingToUpdate,
+                ICollection<Prayer> prayers, PrayerPosition schedule, string memberID = null)
+        {
+
+            if (memberID == null) // if memberID is null, need to delete song if there is one in PrayerPosition.
+            {
+                foreach (var item in prayers) // check prayerPosition in prayers. 
+                {
+                    if (item.Schedule.Equals(schedule)) // if there is a prayer in the prayerPosition, delete it
+                    {
+                        Prayer prayerToRemove
+                            = meetingToUpdate
+                            .Prayers
+                            .SingleOrDefault(i => i.MemberID == item.MemberID && i.Schedule == schedule);
+                        context.Remove(prayerToRemove);
+                        prayers.Remove(prayerToRemove);
+                        return;
+                    } // if there is no prayer, do nothing because it is already empty
+                }
+            }
+            else // if memberID is not empty
+            {
+                int memberIDInt = int.Parse(memberID); // change songID to int
+                int count = 0; // count to see if songPosition is empty
+                foreach (var item in prayers) // check each prayer in meeting for correct prayerPosition
+                {
+                    if (item.Schedule.Equals(schedule))
+                    {
+                        count++; // there is prayer in prayerPosition   
+
+
+                        if (memberIDInt != item.MemberID) // if wrong song is in prayerPosition
+                        {
+                            Prayer prayerToRemove // remove wrong prayer
+                                = meetingToUpdate
+                                .Prayers
+                                .SingleOrDefault(i => i.MemberID == item.MemberID && i.Schedule == schedule);
+                            context.Remove(prayerToRemove);
+                            prayers.Remove(prayerToRemove);
+                        
+
+                            meetingToUpdate.Prayers.Add( // add the correct prayer
+                                new Prayer
+                                {
+                                    MemberID = memberIDInt,
+                                    Schedule = schedule
+                                });
+                            return;
+                        }
+
+                    }
+                    
+                }
+                if (count == 0) // the prayerposition is empty
+                {
+                    meetingToUpdate.Prayers.Add(
+                        new Prayer
+                        {
+                            MemberID = memberIDInt,
+                            Schedule = schedule
+                        });
+                }
+            }
+        }
+
+       
+
+
+        
+
+        
     }
 }
     

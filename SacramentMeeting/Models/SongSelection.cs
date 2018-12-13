@@ -14,6 +14,7 @@ namespace SacramentMeeting.Models
     public class SongSelection
     {
         public int SongSelectionID { get; set; }
+        [Display(Name = "Hymn #")]
         public int SongID { get; set; }
         public int MeetingID { get; set; }
 

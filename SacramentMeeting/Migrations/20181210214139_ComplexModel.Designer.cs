@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SacramentMeeting.Models;
 
 namespace SacramentMeeting.Migrations
 {
     [DbContext(typeof(SacramentMeetingContext))]
-    partial class SacramentMeetingContextModelSnapshot : ModelSnapshot
+    [Migration("20181210214139_ComplexModel")]
+    partial class ComplexModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -113,10 +115,9 @@ namespace SacramentMeeting.Migrations
 
                     b.HasKey("PrayerID");
 
-                    b.HasIndex("MemberID");
+                    b.HasIndex("MeetingID");
 
-                    b.HasIndex("MeetingID", "Schedule")
-                        .IsUnique();
+                    b.HasIndex("MemberID");
 
                     b.ToTable("Prayer");
                 });
@@ -148,10 +149,9 @@ namespace SacramentMeeting.Migrations
 
                     b.HasKey("SongSelectionID");
 
-                    b.HasIndex("SongID");
+                    b.HasIndex("MeetingID");
 
-                    b.HasIndex("MeetingID", "Schedule")
-                        .IsUnique();
+                    b.HasIndex("SongID");
 
                     b.ToTable("SongSelection");
                 });

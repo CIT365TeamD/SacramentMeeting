@@ -12,7 +12,7 @@ namespace SacramentMeeting.Models
         public int MemberID { get; set; }
 
         [StringLength(250, MinimumLength = 2, ErrorMessage = "Topic must be 2-250 characters."),
-            RegularExpression(@"[a-zA-Z""'.,\s-]*$")]
+            RegularExpression(@"[a-zA-Z0-9""'.,\s-]*$")]
         public string Topic { get; set; }
 
         public Meeting Meeting { get; set; }

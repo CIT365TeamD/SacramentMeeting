@@ -11,21 +11,59 @@
 <div>
     <h4>Meeting</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Meeting.MeetingDate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Meeting.MeetingDate)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Meeting.Calling)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Meeting.Calling.Title)
-        </dd>
-    </dl>
-    
+    <div class="col-md-12">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Meeting.MeetingDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Meeting.MeetingDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Meeting.Calling)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Meeting.Calling.Title) - @foreach (var item in Model.Meeting.Calling.CurrentCallings)
+                {@Html.DisplayFor(model => item.Member.FullName)}
+            </dd>
+            <dd></dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Meeting.Prayers)
+            </dt>
+
+            @foreach (var item in Model.Meeting.Prayers)
+            {
+                <dd>
+                    @item.Schedule Prayer: @item.Member.FullName<br />
+                </dd>
+
+            }
+            <dd></dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Meeting.SongSelections)
+            </dt>
+            @foreach (var item in Model.Meeting.SongSelections)
+            {
+                <dd>
+                    @item.Schedule Song: #@item.SongID @item.Song.Title
+                </dd>
+            }
+            <dd></dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Meeting.Talks)
+            </dt>
+            @foreach (var item in Model.Meeting.Talks)
+            {
+                <dd>
+                    @item.Member.FullName - Topic: @item.Topic
+                </dd>
+            }
+        </dl>
+
+    </div>
+
     <form method="post">
         <input type="hidden" asp-for="Meeting.MeetingID" />
         <input type="submit" value="Delete" class="btn btn-default" /> |

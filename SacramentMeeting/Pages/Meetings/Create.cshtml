@@ -19,60 +19,80 @@
                 <span asp-validation-for="Meeting.MeetingDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Meeting.Calling.Title" class="control-label"></label>
-                <select asp-for="Meeting.CallingID" class="form-control" asp-items="@Model.BishopricCallingsSL"></select>
+                <label asp-for="Meeting.Calling.Title" class="control-label">Conducting</label>
+                <select asp-for="Meeting.CallingID" class="form-control" asp-items="@Model.BishopricCallingsSL">
+                    <option value=""> -- Assign --</option>
+                </select>
+                <span asp-validation-for="Meeting.CallingID" class="text-danger"></span>
+
             </div>
-            <div class="form-group">
-                <label for="openingPrayer" class="control-label">Opening Prayer</label>
-                <select name="openingPrayer" class="form-control" asp-items="@Model.OpeningPrayerSL"></select>
-            </div>
-            <div class="form-group">
-                <label for="closingPrayer" class="control-label">Closing Prayer</label>
-                <select name="closingPrayer" class="form-control" asp-items="@Model.ClosingPrayerSL"></select>
-            </div>
+
             <div class="form-group">
                 <label for="openingSong" class="control-label">Opening Song</label>
-                <select name="openingSong" class="form-control" asp-items="@Model.OpeningSongSL"></select>
+                <select name="openingSong" class="form-control" asp-items="@Model.OpeningSongSLI">
+                    <option value=""> -- Assign --</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="sacramentSong" class="control-label">Sacrament Song</label>
-                <select name="sacramentSong" class="form-control" asp-items="@Model.SacramentSongsSL"></select>
+                <select name="sacramentSong" class="form-control" asp-items="@Model.SacramentSongSLI">
+                    <option value=""> -- Assign --</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="closingSong" class="control-label">Closing Song</label>
-                <select name="closingSong" class="form-control" asp-items="@Model.ClosingSongSL"></select>
+                <select name="closingSong" class="form-control" asp-items="@Model.ClosingSongSLI">
+                    <option value=""> -- Assign --</option>
+                </select>
             </div>
             <div class="form-group">
-                <label for="talk0" class="control-label">Talk</label>
-                <select name="talk0" class="form-control" asp-items="@Model.Talk0SL"></select>
+                <label asp="openingPrayer" class="control-label">Opening Prayer</label>
+                <select name="openingPrayer" class="form-control" asp-items="@Model.OpeningPrayerSLI">
+                    <option value=""> -- Assign --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="closingPrayer" class="control-label">Closing Prayer</label>
+                <select name="closingPrayer" class="form-control" asp-items="@Model.ClosingPrayerSLI">
+                    <option value=""> -- Assign --</option>
+                </select>
+            </div>
+            <!--<div class="form-group">
+                    <label for="talks" class="control-label">Talk</label>
+                    <select name="talks" class="form-control" asp-items="">
+                        <option value=""> -- Assign --</option>
+                    </select>
 
-            </div>
-            <div class="form-group">
-                <label for="topic0" class="control-label">Topic</label>
-                <input name="topic0" class="form-control" />
-                <span class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label for="talk1" class="control-label">Talk</label>
-                <select name="talk1" class="form-control" asp-items="@Model.Talk1SL"></select>
 
-            </div>
+                    <label for="topics" class="control-label">Topic</label>
+                    <input name="topics" class="form-control" />
+                    <span class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="talks" class="control-label">Talk</label>
+                    <select name="talks" class="form-control" asp-items="">
+                        <option value=""> -- Assign --</option>
+                    </select>
+
+                    <label for="topics" class="control-label">Topic</label>
+                    <input name="topics" class="form-control" />
+                    <span class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </form>
+        </div>
+    </div>-->
             <div class="form-group">
-                <label for="topic1" class="control-label">Topic</label>
-                <input name="topic1" class="form-control" />
-                <span class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Next" class="btn btn-default" />
             </div>
         </form>
     </div>
+    <div>
+        <a asp-page="Index">Back to List</a>
+    </div>
 </div>
-
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

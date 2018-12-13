@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SacramentMeeting.Models
 {
@@ -19,7 +18,7 @@ namespace SacramentMeeting.Models
         public int MemberID { get; set; }
         public int MeetingID { get; set; }
 
-        //[Required]
+        [Required]
         public PrayerPosition Schedule { get; set; }
 
         public Member Member { get; set; }

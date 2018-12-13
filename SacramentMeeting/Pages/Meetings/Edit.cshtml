@@ -20,15 +20,49 @@
                 <span asp-validation-for="Meeting.MeetingDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Meeting.CallingID" class="control-label"></label>
-                <select asp-for="Meeting.CallingID" class="form-control" asp-items="ViewBag.CallingID"></select>
-                <span asp-validation-for="Meeting.CallingID" class="text-danger"></span>
+                <label asp-for="Meeting.Calling.Title" class="control-label">Conducting</label>
+                <select asp-for="Meeting.CallingID" class="form-control" asp-items="@Model.BishopricCallingsSL"></select>
+<span asp-validation-for="Meeting.CallingID" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="OpeningSong" class="control-label">Opening Song</label>
+                <select name="OpeningSong" class="form-control" asp-items="@Model.OpeningSongSLI">
+                    <option value="">-- No Song Selected --</option>
+                </select>
             </div>
             <div class="form-group">
-                
+                <label for="SacramentSong" class="control-label">Sacrament Song</label>
+                <select name="SacramentSong" class="form-control" asp-items="@Model.SacramentSongSLI">
+                    <option value="">-- No Song Selected --</option>
+                </select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <label for="ClosingSong" class="control-label">Closing Song</label>
+                <select name="ClosingSong" class="form-control" asp-items="@Model.ClosingSongSLI">
+                    <option value="">-- No Song Selected --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp="openingPrayer" class="control-label">Opening Prayer</label>
+                <select name="openingPrayer" class="form-control" asp-items="@Model.OpeningPrayerSLI">
+                    <option value=""> -- Unassigned --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="closingPrayer" class="control-label">Closing Prayer</label>
+                <select name="closingPrayer" class="form-control" asp-items="@Model.ClosingPrayerSLI">
+                    <option value=""> -- Unassigned --</option>
+                </select>
+            </div>
+
+
+
+            <div class="form-group">
+
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Next" class="btn btn-default" />
             </div>
         </form>
     </div>

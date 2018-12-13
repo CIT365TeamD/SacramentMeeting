@@ -1,0 +1,95 @@
+﻿@page 
+@model SacramentMeeting.Pages.Talks.CreateModel
+
+@{
+    ViewData["Title"] = "Create|Add Talks";
+}
+
+<h2>Create</h2>
+
+<h4>Sacrament Meeting | Add Talks</h4>
+<hr />
+<div class="col-md-12">
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Meeting.MeetingDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Meeting.MeetingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Meeting.Calling)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Meeting.Calling.Title) - @foreach (var item in Model.Meeting.Calling.CurrentCallings)
+            {@Html.DisplayFor(model => item.Member.FullName)}
+        </dd>
+        <dd></dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Meeting.Prayers)
+        </dt>
+
+        @foreach (var item in Model.Meeting.Prayers)
+        {
+            <dd>
+                @item.Schedule Prayer: @item.Member.FullName<br />
+            </dd>
+
+        }
+        <dd></dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Meeting.SongSelections)
+        </dt>
+        @foreach (var item in Model.Meeting.SongSelections)
+        {
+            <dd>
+                @item.Schedule Song: #@item.SongID @item.Song.Title
+            </dd>
+        }
+        <dd></dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Meeting.Talks)
+        </dt>
+        @foreach (var item in Model.Meeting.Talks)
+        {
+            <dd>
+                @item.Member.FullName - Topic: @item.Topic
+            </dd>
+        }
+    </dl>
+
+</div>
+
+<div class="col-md-12">
+    <hr />
+    <h4>Add Talk</h4>
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post">
+                <input type="hidden" name="Talk.MeetingID" value="@Model.Meeting.MeetingID" />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Talk.MemberID" class="control-label">Member</label>
+                    <select asp-for="Talk.MemberID" class="form-control" asp-items="ViewBag.MemberID">
+                        <option value="">-- Assign --</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Talk.Topic" class="control-label"></label>
+                    <input asp-for="Talk.Topic" class="form-control" />
+                    <span asp-validation-for="Talk.Topic" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Add" class="btn btn-default" />
+                    <a asp-page="../Meetings/Details" asp-route-id="@Model.Meeting.MeetingID" class="btn btn-default">Done</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

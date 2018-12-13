@@ -18,8 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Prayers\" />
-    <Folder Include="Pages\Talks\" />
+    <Folder Include="Models\SacramentViewModels\" />
   </ItemGroup>
 
 </Project>

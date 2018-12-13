@@ -18,6 +18,16 @@ namespace SacramentMeeting.Models
             RegularExpression(@"^[A-Z]+[a-zA-Z',.\s-]*$")]
         public string Title { get; set; }
 
+        [Display(Name = "Song Selections")]
         public ICollection<SongSelection> SongSelections { get; set; }
+
+
+        public string Display
+        {
+            get
+            {
+                return SongID + " - " + Title;
+            }
+        }
     }
 }

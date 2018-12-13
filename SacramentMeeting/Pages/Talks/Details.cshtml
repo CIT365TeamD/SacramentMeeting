@@ -1,0 +1,86 @@
+﻿@page
+@model SacramentMeeting.Pages.Talks.DetailsModel
+
+@{
+    ViewData["Title"] = "Edit Meeting | Talks";
+}
+<h2>Edit</h2>
+<h4>Sacrament Meeting | Edit Talks</h4>
+<hr />
+<div class="col-md-12">
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Meeting.MeetingDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Meeting.MeetingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Meeting.Calling)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Meeting.Calling.Title) - @foreach (var item in Model.Meeting.Calling.CurrentCallings)
+            {@Html.DisplayFor(model => item.Member.FullName)}
+        </dd>
+        <dd></dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Meeting.Prayers)
+        </dt>
+
+        @foreach (var item in Model.Meeting.Prayers)
+        {
+            <dd>
+                @item.Schedule Prayer: @item.Member.FullName<br />
+            </dd>
+
+        }
+        <dd></dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Meeting.SongSelections)
+        </dt>
+        @foreach (var item in Model.Meeting.SongSelections)
+        {
+            <dd>
+                @item.Schedule Song: #@item.SongID @item.Song.Title
+            </dd>
+        }
+        <dd></dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Meeting.Talks)
+        </dt>
+        @foreach (var item in Model.Meeting.Talks)
+        {
+            <dd>
+                @item.Member.FullName - Topic: @item.Topic
+            </dd>
+        }
+    </dl>
+    <h4>Talks</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Member Assigned</th>
+                    <th>Topic</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var talk in Model.Meeting.Talks)
+                {
+                    <tr>
+                        <td>@talk.Member.FullName</td>
+                        <td>@talk.Topic</td>
+                        <td>
+                            <a asp-page="./Edit" asp-route-id="@talk.TalkID">Edit</a> |
+                            <a asp-page="./Delete" asp-route-id="@talk.TalkID">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+</div>
+<div>
+    <a asp-page="./Create" asp-route-id="@Model.Meeting.MeetingID" class="btn btn-default">Add Talk</a> 
+    <a asp-page="../../Meeting/Index" class="btn btn-default">Done</a>
+</div>

@@ -29,7 +29,16 @@ namespace SacramentMeeting.Pages.Meetings
             }
 
             Meeting = await _context.Meeting
-                .Include(m => m.Calling).FirstOrDefaultAsync(m => m.MeetingID == id);
+                          .Include(m => m.Calling)
+                              .ThenInclude(m => m.CurrentCallings)
+                                  .ThenInclude(m => m.Member)
+                          .Include(m => m.Prayers)
+                              .ThenInclude(m => m.Member)
+                          .Include(m => m.Talks)
+                              .ThenInclude(m => m.Member)
+                          .Include(m => m.SongSelections)
+                              .ThenInclude(m => m.Song)
+                          .FirstOrDefaultAsync(m => m.MeetingID == id);
 
             if (Meeting == null)
             {
@@ -45,10 +54,35 @@ namespace SacramentMeeting.Pages.Meetings
                 return NotFound();
             }
 
-            Meeting = await _context.Meeting.FindAsync(id);
+            Meeting = await _context.Meeting
+                          .Include(m => m.Calling)
+                              .ThenInclude(m => m.CurrentCallings)
+                                  .ThenInclude(m => m.Member)
+                          .Include(m => m.Prayers)
+                              .ThenInclude(m => m.Member)
+                          .Include(m => m.Talks)
+                              .ThenInclude(m => m.Member)
+                          .Include(m => m.SongSelections)
+                              .ThenInclude(m => m.Song)
+                          .FirstOrDefaultAsync(m => m.MeetingID == id);
 
             if (Meeting != null)
             {
+                // remove the talks
+                foreach (var item in Meeting.Talks)
+                {
+                    _context.Talk.Remove(item);
+                }
+                // remove the prayers
+                foreach (var item in Meeting.Prayers)
+                {
+                    _context.Prayer.Remove(item);
+                }
+                // remove the songsSelections
+                foreach (var item in Meeting.SongSelections)
+                {
+                    _context.SongSelection.Remove(item);
+                }
                 _context.Meeting.Remove(Meeting);
                 await _context.SaveChangesAsync();
             }

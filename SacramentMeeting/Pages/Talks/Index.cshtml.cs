@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using SacramentMeeting.Models;
 
-namespace SacramentMeeting.Pages.Meetings
+namespace SacramentMeeting.Pages.Talks
 {
     public class IndexModel : PageModel
     {
@@ -18,18 +18,13 @@ namespace SacramentMeeting.Pages.Meetings
             _context = context;
         }
 
-        public IList<Meeting> Meeting { get;set; }
-        public IList<Member> Member { get; set; }
+        public IList<Talk> Talk { get;set; }
 
         public async Task OnGetAsync()
         {
-            Meeting = await _context.Meeting
-                .Include(m => m.Calling)
-                    .ThenInclude(m => m.CurrentCallings)
-                        .ThenInclude(m => m.Member)
-                            .ThenInclude(m => m.FullName)
-                        .OrderBy(m => m.MeetingDate)
-                .ToListAsync();
+            Talk = await _context.Talk
+                .Include(t => t.Meeting)
+                .Include(t => t.Member).ToListAsync();
         }
     }
 }

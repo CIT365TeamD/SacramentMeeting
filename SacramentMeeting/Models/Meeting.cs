@@ -12,9 +12,11 @@ namespace SacramentMeeting.Models
         public int MeetingID { get; set; }
 
         [DataType(DataType.Date)]
+        [Required, Display(Name = "Meeting Date")]
         public DateTime MeetingDate { get; set; }
 
         [Display(Name ="ConductorID")]
+    
         public int CallingID { get; set; }
         
         [Display(Name ="Conducting")]

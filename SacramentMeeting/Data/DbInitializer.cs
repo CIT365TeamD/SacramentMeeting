@@ -34,7 +34,9 @@ namespace SacramentMeeting.Data
                 new Member{FirstName="Ricky",LastName="Schroder"},
                 new Member{FirstName="Gladys",LastName="Knight"},
                 new Member{FirstName="Jack",LastName="Dempsey"},
-                new Member{FirstName="Danny",LastName="Ainge"}
+                new Member{FirstName="Danny",LastName="Ainge"},
+                new Member{FirstName="Dieter",LastName="Uchtdorf"},
+
             };
             foreach (Member m in members)
             {
@@ -123,18 +125,18 @@ namespace SacramentMeeting.Data
 
             var songSelections = new SongSelection[]
             {
-                new SongSelection{SongID=1,MeetingID=1,Schedule=SongPosition.Opening},
-                new SongSelection{SongID=17,MeetingID=1,Schedule=SongPosition.Sacrament},
-                new SongSelection{SongID=2,MeetingID=1,Schedule=SongPosition.Closing},
-                new SongSelection{SongID=3,MeetingID=2,Schedule=SongPosition.Opening},
-                new SongSelection{SongID=18,MeetingID=2,Schedule=SongPosition.Sacrament},
-                new SongSelection{SongID=4,MeetingID=2,Schedule=SongPosition.Closing},
-                new SongSelection{SongID=5,MeetingID=3,Schedule=SongPosition.Opening},
-                new SongSelection{SongID=19,MeetingID=3,Schedule=SongPosition.Sacrament},
-                new SongSelection{SongID=6,MeetingID=3,Schedule=SongPosition.Closing},
-                new SongSelection{SongID=7,MeetingID=4,Schedule=SongPosition.Opening},
-                new SongSelection{SongID=20,MeetingID=4,Schedule=SongPosition.Sacrament},
-                new SongSelection{SongID=8,MeetingID=4,Schedule=SongPosition.Closing},
+                new SongSelection{SongID=2,MeetingID=1,Schedule=SongPosition.Opening},
+                new SongSelection{SongID=173,MeetingID=1,Schedule=SongPosition.Sacrament},
+                new SongSelection{SongID=8,MeetingID=1,Schedule=SongPosition.Closing},
+                new SongSelection{SongID=19,MeetingID=2,Schedule=SongPosition.Opening},
+                new SongSelection{SongID=181,MeetingID=2,Schedule=SongPosition.Sacrament},
+                new SongSelection{SongID=26,MeetingID=2,Schedule=SongPosition.Closing},
+                new SongSelection{SongID=35,MeetingID=3,Schedule=SongPosition.Opening},
+                new SongSelection{SongID=194,MeetingID=3,Schedule=SongPosition.Sacrament},
+                new SongSelection{SongID=66,MeetingID=3,Schedule=SongPosition.Closing},
+                new SongSelection{SongID=85,MeetingID=4,Schedule=SongPosition.Opening},
+                new SongSelection{SongID=196,MeetingID=4,Schedule=SongPosition.Sacrament},
+                new SongSelection{SongID=98,MeetingID=4,Schedule=SongPosition.Closing},
             };
             foreach (SongSelection s in songSelections)
             {

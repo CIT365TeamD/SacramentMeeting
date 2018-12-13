@@ -32,6 +32,14 @@ namespace SacramentMeeting.Models
                 .HasIndex(m => new { m.FirstName, m.LastName })
                 .IsUnique();
 
+            builder.Entity<Prayer>()
+                .HasIndex(m => new { m.MeetingID, m.Schedule })
+                .IsUnique();
+
+            builder.Entity<SongSelection>()
+                .HasIndex(m => new { m.MeetingID, m.Schedule })
+                .IsUnique();
+                
             
         }
     }
