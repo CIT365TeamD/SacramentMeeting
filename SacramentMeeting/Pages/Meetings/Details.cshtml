@@ -8,97 +8,101 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Meeting</h4>
+
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Meeting.MeetingDate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Meeting.MeetingDate)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Meeting.Calling)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Meeting.Calling.Title) 
-        </dd>
-<!-- Tammmy's code -->
-        <dt>
-            @Html.DisplayNameFor(model => model.Meeting.Prayers)
-        </dt>
-        
-            @foreach (var item in Model.Meeting.Prayers)
-            {
-                <dd>
-                    @item.Schedule Prayer: @item.Member.FullName<br />
-                    </dd>
-                    
-            }
-        <dt>
-            @Html.DisplayNameFor(model => model.Meeting.Talks)
-        </dt>
-        @foreach (var item in Model.Meeting.Talks)
-        {
-            <dd>
-                @item.Member.FullName - Topic: @item.Topic
-            </dd>
-        }
-        <dt>
-            @Html.DisplayNameFor(model => model.Meeting.SongSelections)
-        </dt>
-        @foreach (var item in Model.Meeting.SongSelections)
-        {
-            <dd>
-                @item.Schedule Song: #@item.SongID @item.Song.Title
-            </dd>
-        }
-        
-     <!-- End of Tammy's Code-->   
-<!-- Irena's Code-->
-        
-        <dd>
-            <table class="table">
-                <tr>
-                    <th>Song Title</th>
-                    <th>Schedule</th>
-                </tr>
+    <h4>Sacrament Meeting - @Html.DisplayFor(model => model.Meeting.MeetingDate)</h4>
+    <table class="table detail">
+
+        <tr>
+            <td>Conducting</td>
+            <td >
+                @Html.DisplayFor(model => model.Meeting.Calling.Title) - @foreach (var item in Model.Meeting.Calling.CurrentCallings)
+                {@Html.DisplayFor(model => item.Member.FullName)}
+            </td>
+
+        </tr>
+        <tr>
+            <td>Choirister</td>
+            <td >GET NAME OF CHORISTER</td>
+        </tr>
+        <tr>
+            <td>Organist</td>
+            <td >GET NAME OF ORGANIST</td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td>Opening Hymn</td>
+            <td >
                 @foreach (var item in Model.Meeting.SongSelections)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Song.Title)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Schedule)
-                        </td>
-                    </tr>
+                     @if (item.Schedule.ToString().Contains("Opening"))
+                     {  @Html.DisplayFor(model => item.Song.Display)}
                 }
-            </table>
-        </dd>
-        <dd>
-            <table class="table">
-                <tr>
-                    <th>Person</th>
-                    <th>Schedule</th>
-                </tr>
+            </td>
+        </tr>
+        <tr>
+            <td>Opening Prayer</td>
+            <td >
                 @foreach (var item in Model.Meeting.Prayers)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Member.FullName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Schedule)
-                        </td>
-                    </tr>
+                    @if (item.Schedule.ToString().Contains("Opening"))
+                    {@Html.DisplayFor(model => item.Member.FullName)}
                 }
-            </table>
-        </dd>
-<!-- End of Irena's code-->
-    </dl>
+            </td>
+        </tr>
+        <tr>
+            <td>Sacrament Hymn</td>
+            <td >
+                @foreach (var item in Model.Meeting.SongSelections)
+                {
+                    @if (item.Schedule.ToString().Contains("Sacrament"))
+                    {@Html.DisplayFor(model => item.Song.Display)}
+                }
+            </td>
+        </tr>
+        <tr>
+            <td >Administration of the Sacrament </td>
+            <td>Aaronic Priesthood</td>
+        </tr>
+        <tr>
+
+            <th>Speakers</th>
+            <th>Topic</th>
+        </tr>
+        @foreach (var item in Model.Meeting.Talks)
+        {
+            <tr>
+
+                <td>@Html.DisplayFor(model => item.Member.FullName)</td>
+                <td>@Html.DisplayFor(Model => item.Topic)</td>
+            </tr>
+        }
+        <tr>
+            <td>Closing Hymn</td>
+            <td ">
+                @foreach (var item in Model.Meeting.SongSelections)
+                {
+                    @if (item.Schedule.ToString().Contains("Closing"))
+                    {@Html.DisplayFor(model => item.Song.Display)}
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>Closing Prayer</td>
+            <td >
+                @foreach (var item in Model.Meeting.Prayers)
+                {
+                    @if (item.Schedule.ToString().Contains("Closing"))
+                    {@Html.DisplayFor(model => item.Member.FullName)}
+                }
+            </td>
+        </tr>
+
+
+    </table>
+
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Meeting.MeetingID">Edit</a> |
+    <a asp-page="./Edit" asp-route-id="@Model.Meeting.MeetingID" asp-route-editsss="true">Edit</a> |
     <a asp-page="./Index">Back to List</a>
 </div>

@@ -11,32 +11,83 @@
 <div>
     <h4>Talk</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Talk.Meeting)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Talk.Meeting.MeetingDate)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Talk.Member)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Talk.Member.FullName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Talk.Topic)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Talk.Topic)
-        </dd>
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Meeting.MeetingDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Meeting.MeetingDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Meeting.Calling)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Meeting.Calling.Title) - @foreach (var item in Model.Meeting.Calling.CurrentCallings)
+                {@Html.DisplayFor(model => item.Member.FullName)}
+            </dd>
+            <dd></dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Meeting.Prayers)
+            </dt>
+
+            @foreach (var item in Model.Meeting.Prayers)
+            {
+                <dd>
+                    @item.Schedule Prayer: @item.Member.FullName<br />
+                </dd>
+
+            }
+            <dd></dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Meeting.SongSelections)
+            </dt>
+            @foreach (var item in Model.Meeting.SongSelections)
+            {
+                <dd>
+                    @item.Schedule Song: #@item.SongID @item.Song.Title
+                </dd>
+            }
+            <dd></dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Meeting.Talks)
+            </dt>
+            @foreach (var item in Model.Meeting.Talks)
+            {
+                <dd>
+                    @item.Member.FullName - Topic: @item.Topic
+                </dd>
+            }
+        </dl>
+    <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Talk.Meeting)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Talk.Meeting.MeetingDate)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Talk.Member)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Talk.Member.FullName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Talk.Topic)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Talk.Topic)
+            </dd>
 
 
-    </dl>
-    
-    <form method="post">
-        <input type="hidden" asp-for="Talk.TalkID" />
-        <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-page="./Index">Back to List</a>
-    </form>
-</div>
+        </dl>
+
+        <form method="post">
+            <input type="hidden" asp-for="Talk.TalkID" />
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <a asp-page="./Details" asp-route-id="@Model.Talk.MeetingID">Back to List</a>
+        </form>
+    </div>

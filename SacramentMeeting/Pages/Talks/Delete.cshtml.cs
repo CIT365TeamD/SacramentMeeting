@@ -47,7 +47,7 @@ namespace SacramentMeeting.Pages.Talks
                                .ThenInclude(m => m.Member)
                            .Include(m => m.SongSelections)
                                .ThenInclude(m => m.Song)
-                           .FirstOrDefaultAsync(m => m.MeetingID == id);
+                           .FirstOrDefaultAsync(m => m.MeetingID == Talk.MeetingID);
             return Page();
         }
 

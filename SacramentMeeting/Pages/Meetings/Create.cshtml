@@ -13,6 +13,9 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           @if (Model.Message != null)
+           { <p class="text-danger">@Model.Message</p>}
+
             <div class="form-group">
                 <label asp-for="Meeting.MeetingDate" class="control-label"></label>
                 <input asp-for="Meeting.MeetingDate" class="form-control" />
@@ -58,40 +61,42 @@
                 </select>
             </div>
             <!--<div class="form-group">
-                    <label for="talks" class="control-label">Talk</label>
-                    <select name="talks" class="form-control" asp-items="">
-                        <option value=""> -- Assign --</option>
-                    </select>
+                        <label for="talks" class="control-label">Talk</label>
+                        <select name="talks" class="form-control" asp-items="">
+                            <option value=""> -- Assign --</option>
+                        </select>
 
 
-                    <label for="topics" class="control-label">Topic</label>
-                    <input name="topics" class="form-control" />
-                    <span class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label for="talks" class="control-label">Talk</label>
-                    <select name="talks" class="form-control" asp-items="">
-                        <option value=""> -- Assign --</option>
-                    </select>
+                        <label for="topics" class="control-label">Topic</label>
+                        <input name="topics" class="form-control" />
+                        <span class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="talks" class="control-label">Talk</label>
+                        <select name="talks" class="form-control" asp-items="">
+                            <option value=""> -- Assign --</option>
+                        </select>
 
-                    <label for="topics" class="control-label">Topic</label>
-                    <input name="topics" class="form-control" />
-                    <span class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-default" />
-                </div>
-            </form>
-        </div>
-    </div>-->
+                        <label for="topics" class="control-label">Topic</label>
+                        <input name="topics" class="form-control" />
+                        <span class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </form>
+            </div>
+        </div>-->
             <div class="form-group">
+
                 <input type="submit" value="Next" class="btn btn-default" />
             </div>
         </form>
+        <div>
+            <a asp-page="Index">Back to List</a>
+        </div>
     </div>
-    <div>
-        <a asp-page="Index">Back to List</a>
-    </div>
+   
 </div>
     @section Scripts {
         @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

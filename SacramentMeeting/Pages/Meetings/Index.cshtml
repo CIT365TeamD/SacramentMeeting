@@ -41,13 +41,13 @@
                     @Html.DisplayFor(modelItem => item.MeetingDate)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Calling.Title) - @foreach (var member in item.Calling.CurrentCallings)
-                    { @Html.Display(member.Member.FullName)}
+                    @Html.DisplayFor(modelItem => item.Calling.Title) - @foreach (var person in item.Calling.CurrentCallings)
+                    {@person.Member.FullName }
                 </td>
 
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.MeetingID">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.MeetingID">Details</a> |
+                    <a asp-page="./Edit" asp-route-id="@item.MeetingID" asp-route-edit="true">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.MeetingID" >Details</a> |
                     <a asp-page="./Delete" asp-route-id="@item.MeetingID">Delete</a>
                 </td>
             </tr>

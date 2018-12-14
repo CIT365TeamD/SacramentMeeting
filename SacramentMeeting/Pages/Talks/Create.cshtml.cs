@@ -19,8 +19,10 @@ namespace SacramentMeeting.Pages.Talks
             _context = context;
         }
         public Meeting Meeting { get; set; }
-        public async Task<IActionResult> OnGetAsync(int id)
+        public bool Edit { get; set; }
+        public async Task<IActionResult> OnGetAsync(int id, bool? edit)
         {
+
             Meeting = await _context.Meeting
                             .Include(m => m.Calling)
                                 .ThenInclude(m => m.CurrentCallings)
@@ -41,7 +43,7 @@ namespace SacramentMeeting.Pages.Talks
         [BindProperty]
         public Talk Talk { get; set; }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(bool? edit)
         {
             if (!ModelState.IsValid)
             {
@@ -55,10 +57,18 @@ namespace SacramentMeeting.Pages.Talks
             {
                 _context.Talk.Add(newTalk);
                 await _context.SaveChangesAsync();
+
+                if (Edit)
+                {
+                    return RedirectToPage("../Meetings/Edit", new { id = newTalk.MeetingID });
+                }
                 return RedirectToPage("./Create", new {id = newTalk.MeetingID });
             }
-            
 
+            if (Edit)
+            {
+                return RedirectToPage("../Meetings/Edit", new { id = newTalk.MeetingID });
+            }
             return RedirectToPage("./Create", new { id = newTalk.MeetingID });
         }
     }

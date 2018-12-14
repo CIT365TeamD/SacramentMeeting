@@ -72,8 +72,8 @@
                         <td>@talk.Member.FullName</td>
                         <td>@talk.Topic</td>
                         <td>
-                            <a asp-page="./Edit" asp-route-id="@talk.TalkID">Edit</a> |
-                            <a asp-page="./Delete" asp-route-id="@talk.TalkID">Delete</a>
+                            <a asp-page="./Edit" asp-route-id="@talk.TalkID" class="btn btn-default">Edit</a> |
+                            <a asp-page="./Delete" asp-route-id="@talk.TalkID" class="btn btn-default">Delete</a>
                         </td>
                     </tr>
                 }
@@ -81,6 +81,8 @@
         </table>
 </div>
 <div>
-    <a asp-page="./Create" asp-route-id="@Model.Meeting.MeetingID" class="btn btn-default">Add Talk</a> 
-    <a asp-page="../../Meeting/Index" class="btn btn-default">Done</a>
+    <a asp-page="../Meetings/Edit" asp-route-id="@Model.Meeting.MeetingID" asp-route-edit="true" class="btn btn-default">Back</a>
+    
+    <a asp-page="./Create" asp-route-id="@Model.Meeting.MeetingID" asp-route-edit="true" class="btn btn-default">Add Talk</a>
 </div>
+<div><a asp-page="../Meetings/Index" class="">Back to Full List</a></div>

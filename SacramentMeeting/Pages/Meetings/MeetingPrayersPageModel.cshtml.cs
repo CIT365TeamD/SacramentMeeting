@@ -18,6 +18,43 @@ namespace SacramentMeeting.Pages.Meetings
         public List<SelectListItem> SacramentSongSLI { get; set; }
         public List<SelectListItem> OpeningSongSLI { get; set; }
 
+        // validate meeting input
+        public string ValidateMeetingInput(string OpeningSong = null, string ClosingSong = null, string SacramentSong = null, 
+            string OpeningPrayer = null, string ClosingPrayer = null)
+        {
+            string Message = "";
+            if (OpeningSong != null)
+            {
+                bool res = int.TryParse(OpeningSong, out int num);
+                if (res == false) { Message = "Choose valid Opening Song."; }
+            }
+            if (ClosingSong != null)
+            {
+                bool res = int.TryParse(ClosingSong, out int num);
+                if (res == false) { Message = "Choose valid Closing Song."; }
+            }
+            if (SacramentSong != null)
+            {
+                bool res = int.TryParse(SacramentSong, out int num);
+                if (res == false) { Message = "Choose valid Sacrament Song."; }
+            }
+            if (OpeningPrayer != null)
+            {
+                bool res = int.TryParse(OpeningPrayer, out int num);
+                if (res == false) { Message = "Choose valid Opening Song."; }
+            }
+            if (ClosingPrayer != null)
+            {
+                bool res = int.TryParse(ClosingPrayer, out int num);
+                if (res == false) { Message = "Choose valid Closing Prayer."; }
+            }
+                return Message;
+
+        }
+           
+        
+
+        
         // Populates all song dropdown lists
         public void PopulateSongsSLI(SacramentMeetingContext context,
             Meeting meeting = null)
@@ -33,17 +70,22 @@ namespace SacramentMeeting.Pages.Meetings
             IEnumerable<int> SacramentSongID = null;
             if (meeting != null)
             {
-                OpeningSongID = meeting.SongSelections
-                                      .Where(c => c.Schedule == SongPosition.Opening)
-                                      .Select(c => c.SongID);
+                if (meeting.SongSelections != null)
+                {
 
-                ClosingSongID = meeting.SongSelections
-                                       .Where(c => c.Schedule == SongPosition.Closing)
-                                       .Select(c => c.SongID);
 
-                SacramentSongID = meeting.SongSelections
-                                     .Where(c => c.Schedule == SongPosition.Sacrament)
-                                     .Select(c => c.SongID);
+                    OpeningSongID = meeting.SongSelections
+                                          .Where(c => c.Schedule == SongPosition.Opening)
+                                          .Select(c => c.SongID);
+
+                    ClosingSongID = meeting.SongSelections
+                                           .Where(c => c.Schedule == SongPosition.Closing)
+                                           .Select(c => c.SongID);
+
+                    SacramentSongID = meeting.SongSelections
+                                         .Where(c => c.Schedule == SongPosition.Sacrament)
+                                         .Select(c => c.SongID);
+                }
             }
             // Create List of Select List items. For each song in Song table, create select list item
 
@@ -160,16 +202,19 @@ namespace SacramentMeeting.Pages.Meetings
             // get ids of opening and closing prayer for meeting
             if (meeting != null)
             {
-                OpeningPrayerID = meeting.Prayers
-                            .Where(p => p.MeetingID == meeting.MeetingID)
-                            .Where(p => p.Schedule == PrayerPosition.Opening)
-                            .Select(p => p.MemberID);
+                if (meeting.Prayers != null)
+                {
+                    OpeningPrayerID = meeting.Prayers
+                                .Where(p => p.MeetingID == meeting.MeetingID)
+                                .Where(p => p.Schedule == PrayerPosition.Opening)
+                                .Select(p => p.MemberID);
 
-                ClosingPrayerID = meeting.Prayers
-                                  .Where(p => p.MeetingID == meeting.MeetingID)
-                                  .Where(p => p.Schedule == PrayerPosition.Closing)
-                                  .Select(p => p.MemberID);
 
+                    ClosingPrayerID = meeting.Prayers
+                                      .Where(p => p.MeetingID == meeting.MeetingID)
+                                      .Where(p => p.Schedule == PrayerPosition.Closing)
+                                      .Select(p => p.MemberID);
+                }
             }
             // create new select item list
 

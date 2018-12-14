@@ -21,18 +21,19 @@ namespace SacramentMeeting.Pages.Meetings
 
         public IActionResult OnGet()
         {
-           
+
             PopulateBishopricSL(_context);
             PopulatePrayersSLI(_context);
             PopulateSongsSLI(_context);
-            
+
             return Page();
-            
-            
+
+
         }
 
         [BindProperty]
         public Meeting Meeting { get; set; }
+        public string Message { get; set; }
         public string OpeningPrayer { get; set; }
         public string ClosingPrayer { get; set; }
         public string OpeningSong { get; set; }
@@ -45,13 +46,47 @@ namespace SacramentMeeting.Pages.Meetings
         {
             if (!ModelState.IsValid)
             {
-                PopulateBishopricSL(_context);
-                PopulatePrayersSLI(_context);
-                PopulateSongsSLI(_context);
+                PopulateBishopricSL(_context, Meeting.Calling);
+                PopulatePrayersSLI(_context, Meeting);
+                PopulateSongsSLI(_context, Meeting);
+                Message = "There was an error saving meeting.";
+                return Page();
+            }
+        
+            Message = ValidateMeetingInput(OpeningSong, ClosingSong, SacramentSong, OpeningPrayer, ClosingPrayer);
+
+            if (Message != "")
+            {
+                PopulateBishopricSL(_context, Meeting.Calling);
+                PopulatePrayersSLI(_context, Meeting);
+                PopulateSongsSLI(_context, Meeting);
 
                 return Page();
             }
 
+            // Validation
+            // Meeting date is not unique - "Meeting date already exists."
+            if (Meeting != null)
+            {
+                Message = "";
+             var meetings = _context.Meeting;
+                foreach (Meeting item in meetings)
+                {
+                    if (item.MeetingDate == Meeting.MeetingDate)
+                    {
+                        Message = "A meeting for this date already exists.";
+
+
+                        PopulateBishopricSL(_context, Meeting.Calling);
+                        PopulatePrayersSLI(_context, Meeting);
+                        PopulateSongsSLI(_context, Meeting);
+
+                        return Page();
+                    }
+                }
+            }
+            
+            // if songs not null, check if int
             var newMeeting = new Meeting();
             // Add prayers
             if (OpeningPrayer != null || ClosingPrayer != null)
@@ -109,7 +144,7 @@ namespace SacramentMeeting.Pages.Meetings
                     newMeeting.SongSelections.Add(songToAddC);
                 }
             }
-          
+
             try
             {
 
@@ -122,16 +157,16 @@ namespace SacramentMeeting.Pages.Meetings
                     _context.Meeting.Add(newMeeting);
                     await _context.SaveChangesAsync();
                     //return RedirectToPage("./Index");
-                    return RedirectToPage("../Talks/Create", new {id = newMeeting.MeetingID });
-            }
+                    return RedirectToPage("../Talks/Create", new { id = newMeeting.MeetingID });
+                }
             }
             catch (Exception)
             {
 
-                PopulateBishopricSL(_context, newMeeting.CallingID);
-                PopulateSongsSLI(_context, newMeeting);
-                PopulatePrayersSLI(_context, newMeeting);
-
+                PopulateBishopricSL(_context);
+                PopulateSongsSLI(_context);
+                PopulatePrayersSLI(_context);
+                Message = "There was an error saving meeting.";
                 return RedirectToPage("./Create");
             }
 

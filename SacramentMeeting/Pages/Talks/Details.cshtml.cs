@@ -28,14 +28,7 @@ namespace SacramentMeeting.Pages.Talks
                 return NotFound();
             }
 
-            Talk = await _context.Talk
-                .Include(t => t.Meeting)
-                .Include(t => t.Member).FirstOrDefaultAsync(m => m.MeetingID == id);
-
-            if (Talk == null)
-            {
-                return NotFound();
-            }
+            
             Meeting = await _context.Meeting
                            .Include(m => m.Calling)
                                .ThenInclude(m => m.CurrentCallings)
@@ -47,6 +40,10 @@ namespace SacramentMeeting.Pages.Talks
                            .Include(m => m.SongSelections)
                                .ThenInclude(m => m.Song)
                            .FirstOrDefaultAsync(m => m.MeetingID == id);
+            if (Meeting == null)
+            {
+                return NotFound();
+            }
             return Page();
         }
     }
