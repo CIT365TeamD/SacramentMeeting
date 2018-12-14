@@ -2,7 +2,7 @@
 @model SacramentMeeting.Pages.Callings.IndexModel
 
 @{
-    ViewData["Title"] = "Callings";
+    ViewData["Title"] = "Index";
 }
 
 <h2>Callings</h2>
@@ -26,26 +26,27 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Calling) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Organization)
-            </td>
-            <td>
-                @foreach (var i in item.CurrentCallings)
-                {
-                    @Html.DisplayFor(modelItem => i.Member.FullName)<br />
-                }
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.CallingID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.CallingID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.CallingID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Calling)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Organization)
+                </td>
+                <td>
+                    @foreach (var i in item.CurrentCallings)
+                    {
+                        @Html.DisplayFor(modelItem => i.Member.FullName)<br />
+                    }
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.CallingID">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.CallingID">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.CallingID">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

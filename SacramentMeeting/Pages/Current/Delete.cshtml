@@ -1,0 +1,40 @@
+﻿@page
+@model SacramentMeeting.Pages.Current.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Current Calling</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrentCalling.DateCalled)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CurrentCalling.DateCalled)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrentCalling.Calling)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CurrentCalling.Calling.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrentCalling.Member)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CurrentCalling.Member.FullName)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="CurrentCalling.CurrentCallingID" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>
