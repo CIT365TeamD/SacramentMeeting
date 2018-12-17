@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SacramentMeeting.Models;
 
 namespace SacramentMeeting.Migrations
 {
     [DbContext(typeof(SacramentMeetingContext))]
-    partial class SacramentMeetingContextModelSnapshot : ModelSnapshot
+    [Migration("20181216203144_gender")]
+    partial class gender
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,8 +26,6 @@ namespace SacramentMeeting.Migrations
                     b.Property<int>("CallingID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CallingGender");
 
                     b.Property<int>("Organization");
 
@@ -89,11 +89,11 @@ namespace SacramentMeeting.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
+                    b.Property<int>("Gender");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(50);
-
-                    b.Property<int>("MembersGender");
 
                     b.HasKey("ID");
 

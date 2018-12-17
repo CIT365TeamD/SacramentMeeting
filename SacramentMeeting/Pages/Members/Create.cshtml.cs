@@ -17,9 +17,11 @@ namespace SacramentMeeting.Pages.Members
         {
             _context = context;
         }
+        public List<Gender> GendersList;
 
         public IActionResult OnGet()
         {
+            GendersList = Enum.GetValues(typeof(Gender)).Cast<Gender>().ToList();
             return Page();
         }
 

@@ -8,6 +8,11 @@ using System.ComponentModel;
 
 namespace SacramentMeeting.Models
 {
+    public enum GenderCl
+    {
+        Male, Female, Both
+    }
+
     public enum Organizations
     {
         [Description("Bishopric")] Bishopric,
@@ -20,6 +25,8 @@ namespace SacramentMeeting.Models
     }
     public class Calling
     {
+
+        
         public int CallingID { get; set; }
 
         [Required, Display(Name = "Calling"),
@@ -32,6 +39,7 @@ namespace SacramentMeeting.Models
 
         [Display(Name = "Current Callings")]
         public ICollection<CurrentCalling> CurrentCallings { get; set; }
-        
+
+        public GenderCl CallingGender { get; set; }
     }
 }

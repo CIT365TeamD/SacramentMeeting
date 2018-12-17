@@ -17,11 +17,12 @@ namespace SacramentMeeting.Pages.Members
         {
             _context = context;
         }
-
+        public List<Gender> GendersList;
         public Member Member { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            GendersList = Enum.GetValues(typeof(Gender)).Cast<Gender>().ToList();
             if (id == null)
             {
                 return NotFound();
