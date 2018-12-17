@@ -37,7 +37,7 @@ namespace SacramentMeeting.Pages.Current
             {
                 return NotFound();
             }
-           ViewData["CallingID"] = new SelectList(_context.Calling, "CallingID", "Title");
+           ViewData["CallingID"] = new SelectList(_context.Calling, "CallingID", "Display");
            ViewData["MemberID"] = new SelectList(_context.Member, "ID", "FullName");
             return Page();
         }
@@ -59,7 +59,7 @@ namespace SacramentMeeting.Pages.Current
             if (Calling.CallingGender != GenderCl.Both && Calling.CallingGender.ToString() != Member.MembersGender.ToString())
             {
                 Message = "Member is wrong gender for this calling.";
-                ViewData["CallingID"] = new SelectList(_context.Calling, "CallingID", "Title");
+                ViewData["CallingID"] = new SelectList(_context.Calling, "CallingID", "Display");
                 ViewData["MemberID"] = new SelectList(_context.Member, "ID", "FullName");
                 return Page();
             }

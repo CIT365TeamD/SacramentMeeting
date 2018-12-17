@@ -25,6 +25,7 @@ namespace SacramentMeeting.Pages.Current
             CurrentCalling = await _context.CurrentCalling
                 .Include(c => c.Calling)
                 .Include(c => c.Member)
+                .OrderBy(c => c.Calling.Organization)
                 .ToListAsync();
         }
     }
