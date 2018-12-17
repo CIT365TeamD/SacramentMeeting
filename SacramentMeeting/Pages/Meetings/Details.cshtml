@@ -14,9 +14,9 @@
     <table class="table detail">
 
         <tr>
-            <td>Conducting</td>
+            <td>Conducting: @Html.DisplayFor(model => model.Meeting.Calling.Title)</td>
             <td >
-                @Html.DisplayFor(model => model.Meeting.Calling.Title) - @foreach (var item in Model.Meeting.Calling.CurrentCallings)
+                 @foreach (var item in Model.Meeting.Calling.CurrentCallings)
                 {@Html.DisplayFor(model => item.Member.FullName)}
             </td>
 

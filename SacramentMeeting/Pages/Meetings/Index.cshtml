@@ -16,7 +16,7 @@
             <span class="title">Find Meeting:</span>
 
             <span>
-                Start Date <input type="date" name="startDate" class="index-input"  required />
+                Start Date <input type="date" name="startDate" class="index-input" id="meetingStart"  required />
             </span>
             <span>End Date <input type="date" class="index-input" name="endDate"  /></span>
             <input type="submit" value="Search" class="btn btn-default" />
@@ -59,3 +59,4 @@
     </tbody>
 </table>
 <a asp-page="Index">View Full List</a>
+<script>document.getElementById("meetingStart").valueAsDate = new Date();</script>

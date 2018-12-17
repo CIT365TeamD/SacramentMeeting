@@ -20,7 +20,7 @@ namespace SacramentMeeting.Pages.Members
 
         [BindProperty]
         public Member Member { get; set; }
-
+        public string Message { get; set; }
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -44,15 +44,44 @@ namespace SacramentMeeting.Pages.Members
                 return NotFound();
             }
 
-            Member = await _context.Member.FindAsync(id);
+            Member = await _context.Member
+                .Include(m => m.Talks)
+                .Include(m => m.Prayers)
+                .Include(m => m.CurrentCallings)
+                .FirstOrDefaultAsync(m => m.ID == id);
+            
+                if (Member != null)
+                {
+                try
+                {
+                    foreach (var talk in Member.Talks)
+                    {
+                        _context.Talk.Remove(talk);
+                    }
+                    foreach (var prayer in Member.Prayers)
+                    {
+                        _context.Prayer.Remove(prayer);
+                    }
+                    foreach (var calling in Member.CurrentCallings)
+                    {
+                        _context.CurrentCalling.Remove(calling);
+                    }
+                    _context.Member.Remove(Member);
+                    await _context.SaveChangesAsync();
+                    return RedirectToPage("./Index");
 
-            if (Member != null)
-            {
-                _context.Member.Remove(Member);
-                await _context.SaveChangesAsync();
+                }
+                catch (Exception)
+                {
+                    Message = "Error Deleting Member. Try again.";
+                    return Page();
+                }
+                
             }
-
-            return RedirectToPage("./Index");
+            Message = "Error Deleting Member. Try again.";
+            return Page();
+            
+            
         }
     }
 }

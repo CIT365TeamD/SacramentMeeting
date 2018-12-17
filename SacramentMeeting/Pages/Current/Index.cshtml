@@ -34,9 +34,9 @@
             <td>
             
                 @Html.DisplayFor(modelItem => item.Calling.Title) - @foreach (var person in item.Calling.CurrentCallings)
-                {@person.Calling.Organization}
+                {@person.Calling.Display}
             
-            @*@Html.DisplayFor(modelItem => item.Calling.Title)*@
+
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Member.FullName)

@@ -4,37 +4,22 @@ body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
-
-.navbar-inverse {
-    background-color: #E7EFEC;
-    border: none;
-}
-header a:hover {
-    color: black;
-    text-decoration: none;
-}
-.form-next {
-    margin-top: 40px;
-}
-.down20 {
-    margin-top: 20px;
-}
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
-a, a:link, a:visited {
-    color: rgb(106, 144, 131);
-}
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
 }
-
-.detail td {
-    width: 40%
-
+h2 {
+    margin-top: 0;
 }
-.detail #center {
+/* Links */
+a, a:link, a:visited {
+    color: rgb(106, 144, 131);
+}
 
+/* Nav*/
+.navbar-inverse {
+    background-color: #E7EFEC;
+    border: none;
 }
 .navbar-inverse .navbar-toggle {
     border-color: rgb(179, 198, 191);
@@ -58,9 +43,59 @@ a, a:link, a:visited {
 .navbar-inverse .navbar-nav > li > a:active {
         color: #ffffff;
     }
-h2 {
-    margin-top: 0;
+/* Forms */
+.form-next {
+    margin-top: 40px;
 }
+
+.down20 {
+    margin-top: 20px;
+}
+
+.detail td {
+    width: 40%
+}
+
+.title {
+    font-weight: 600;
+}
+
+form .btn {
+    margin-top: -1px;
+}
+.meeting-display {
+    background-color: #E7EFEC;
+    padding: 5px;
+    padding-left: 25px;
+}
+
+.meeting-title {
+    width: 130px;
+    display: inline-block;
+}
+
+.meeting-song {
+    width: 40px;
+    display: inline-block;
+}
+
+.meeting-speaker {
+    margin-left: 15px;
+}
+
+.meeting-display dd {
+    min-height: 10px;
+}
+
+.song-display {
+    float: left;
+    padding-right: 10px;
+}
+
+.done-link {
+    margin-top: 10px;
+}
+/* Home Page*/
 .img-box {
     position: relative;
     max-height: 350px;
@@ -90,41 +125,42 @@ h2 {
     padding: 5px 0;
 }
 
-.title {
-    font-weight: 600;
-}
 .index-input {
     padding: 4px 0;
     width: 133px;
 }
 
-form .btn {
-    margin-top: -1px;
-}
+/* buttons */
 .btn-default, .btn-default:link, .btn-default:visited {
     height: 35px;
     border-color: rgb(179, 198, 191);
     background-color: #E7EFEC;
     color: black;
 }
-    .btn-default:hover, .btn-default:focus {
-        background-color: #ffffff;
-        border-color: rgb(106, 144, 131);
-        color: rgb(106, 144, 131);
-    }
-    .btn-default:active {
-        background-color: rgb(106, 144, 131);
-        border-color: #ffffff;
-    }
+.btn-default:hover, .btn-default:focus {
+    background-color: #ffffff;
+    border-color: rgb(106, 144, 131);
+    color: rgb(106, 144, 131);
+}
+    .btn-default:hover:active, .btn-default.active:hover, .open > .dropdown-toggle.btn-default:hover, .btn-default:focus:active, .btn-default.active:focus, .open > .dropdown-toggle.btn-default:focus, .btn-default.focus:active, .btn-default.active.focus, .open > .dropdown-toggle.btn-default.focus, btn-default:active 
+
+ {
+    background-color: rgb(179, 198, 191);
+    border-color: rgb(106, 144, 131);
+}
 .navbar-nav {
     margin: 0 auto;
     float: none;
 }
-
+/* Logo link */
+header a:hover {
+    color: black;
+    text-decoration: none;
+}
 
 .logo, .logo:link, .logo:visited {
     color: black;
-    font-size: xx-large;
+    font-size: medium;
     text-align: center;
     display: block;
     margin-top: -30px;
@@ -132,35 +168,8 @@ form .btn {
     line-height: 1em;
 }
 
-.meeting-display {
-    background-color: #E7EFEC;
-    padding: 5px;
-    padding-left: 25px;
-}
-.meeting-title {
-    width: 130px;
-    display: inline-block;
-}
-.meeting-song {
-    width: 40px;
-    display: inline-block;
-}
-.meeting-speaker {
-    margin-left: 15px;
 
-}
-.meeting-display dd {
-    min-height: 10px;
-    
-}
-.song-display {
-    float: left;
-    padding-right: 10px;
-}
-.done-link {
-    margin-top: 10px;
-}
-
+/* Media Queries*/
 @media all and (min-width: 500px)
 {
     .img-box h4 {
@@ -171,6 +180,7 @@ form .btn {
         width: 50%;
         padding: 20px;
         border-radius: 2px;
+        background-color: #E7EFEC;
         background-color: rgba(255, 255, 255, 0.8);
         font-size: medium;
 
@@ -184,6 +194,9 @@ form .btn {
     .half {
         width: 45%;
         min-width: 250px;
+    }
+    .logo, .logo:link, .logo:visited {
+        font-size: x-large;
     }
     
 
@@ -236,8 +249,8 @@ form .btn {
         }
 
 
-        }
 }
+
 @media all and (min-width: 992px) {
     .img-box h4 {
         bottom: 10%;

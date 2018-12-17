@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace SacramentMeeting.Models
 {
@@ -15,13 +11,13 @@ namespace SacramentMeeting.Models
 
     public enum Organizations
     {
-        [Description("Bishopric")] Bishopric,
-        [Description("Elder's Quorum")] Elders_Quorum,
-        [Description("Relief Society")] Relief_Society,
-        [Description("Young Men")] Young_Men,
-        [Description("Young Women")] Young_Women,
-        [Description("Primary")] Primary,
-        [Description("Music")] Music
+        [Display(Name ="Bishopric")] Bishopric,
+        [Display(Name ="Elder's Quorum")] Elders_Quorum,
+        [Display(Name = "Relief Society")] Relief_Society,
+        [Display(Name = "Young Men")] Young_Men,
+        [Display(Name = "Young Women")] Young_Women,
+        [Display(Name = "Primary")] Primary,
+        [Display(Name = "Music")] Music
     }
     public class Calling
     {
@@ -41,5 +37,16 @@ namespace SacramentMeeting.Models
         public ICollection<CurrentCalling> CurrentCallings { get; set; }
 
         public GenderCl CallingGender { get; set; }
+
+        public string Display
+        {
+            get
+            {
+                string[] org = Organization.ToString().Split('_');
+                string organization = string.Join(" ", org);
+                return Title + " - " + organization;
+            }
+                }
+        
     }
 }

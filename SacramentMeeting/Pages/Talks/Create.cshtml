@@ -45,7 +45,7 @@
         {
             <dd>
                 <span class="meeting-title">@item.Schedule Song:</span><span class="meeting-song">#@item.SongID </span>@item.Song.Title
-</dd>
+            </dd>
         }
         <dd></dd>
         <dt>
@@ -55,21 +55,22 @@
         {
             <dd>
                 <span class="meeting-title">Speaker:</span>@item.Member.FullName<span class="meeting-speaker">Topic: @item.Topic</span>
-</dd>
+            </dd>
         }
     </dl>
 
 </div>
 
-<div class="col-md-12">
 
+<div class="col-md-12">
     <h4>Add Talk</h4>
     <div class="row">
         <div class="col-md-12">
             <form method="post">
                 <input type="hidden" name="Talk.MeetingID" value="@Model.Meeting.MeetingID" />
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                @if (Model.Edit) { <input type="hidden" name="edit" value="true" />}
+                @if (Model.Edit)
+                {<input type="hidden" name="edit" value="true" />}
                 <div class="form-group">
                     <label asp-for="Talk.MemberID" class="control-label">Member</label>
                     <select asp-for="Talk.MemberID" class="form-control" asp-items="ViewBag.MemberID">
@@ -82,7 +83,7 @@
                     <span asp-validation-for="Talk.Topic" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                   @if (Model.Edit)
+                    @if (Model.Edit)
                     {
                         <a asp-page="../Meetings/Edit" asp-route-id="@Model.Meeting.MeetingID" asp-route-edit="true" class="btn btn-default">Back</a>
                     }
@@ -90,16 +91,20 @@
                     {
                         <a asp-page="../Meetings/edit" asp-route-id="@Model.Meeting.MeetingID" class="btn btn-default">Back</a>
                     }
-                    
 
-                    
+
+
                     <input type="submit" value="Add" class="btn btn-default" />
                 </div>
             </form>
-            <a asp-page="../Meetings/Details" asp-route-id="@Model.Meeting.MeetingID">Done Creating Meeting</a>
+
         </div>
     </div>
 </div>
+    <div>
+        <a asp-page="../Meetings/Details" asp-route-id="@Model.Meeting.MeetingID">Done Creating Meeting</a>
+    </div>
+
 
     @section Scripts {
         @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
