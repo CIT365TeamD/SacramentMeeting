@@ -5,13 +5,12 @@
     ViewData["Title"] = "Delete";
 }
 
-<h2>Delete</h2>
+<h2>Delete Talk</h2>
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Talk</h4>
-    <hr />
 
+    <div class="col-md-12 meeting-display">
         <dl class="dl-horizontal">
             <dt>
                 @Html.DisplayNameFor(model => model.Meeting.MeetingDate)
@@ -24,7 +23,7 @@
                 @Html.DisplayNameFor(model => model.Meeting.Calling)
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.Meeting.Calling.Title) - @foreach (var item in Model.Meeting.Calling.CurrentCallings)
+                <span class="meeting-title">@Html.DisplayFor(model => model.Meeting.Calling.Title):</span>@foreach (var item in Model.Meeting.Calling.CurrentCallings)
                 {@Html.DisplayFor(model => item.Member.FullName)}
             </dd>
             <dd></dd>
@@ -35,7 +34,7 @@
             @foreach (var item in Model.Meeting.Prayers)
             {
                 <dd>
-                    @item.Schedule Prayer: @item.Member.FullName<br />
+                    <span class="meeting-title">@item.Schedule Prayer:</span>@item.Member.FullName<br />
                 </dd>
 
             }
@@ -47,7 +46,7 @@
             @foreach (var item in Model.Meeting.SongSelections)
             {
                 <dd>
-                    @item.Schedule Song: #@item.SongID @item.Song.Title
+                    <span class="meeting-title">@item.Schedule Song:</span><span class="meeting-song">#@item.SongID </span>@item.Song.Title
                 </dd>
             }
             <dd></dd>
@@ -57,34 +56,33 @@
             @foreach (var item in Model.Meeting.Talks)
             {
                 <dd>
-                    @item.Member.FullName - Topic: @item.Topic
+                    <span class="meeting-title">Speaker:</span>@item.Member.FullName<span class="meeting-speaker">Topic: @item.Topic</span>
                 </dd>
             }
         </dl>
-    <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Talk.Meeting)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Talk.Meeting.MeetingDate)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Talk.Member)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Talk.Member.FullName)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Talk.Topic)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Talk.Topic)
-            </dd>
+    </div>
+    <div class="col-md-12">
+        <h4>Delete Talk?</h4>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Talk.Member)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Talk.Topic)
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.Talk.Member.FullName)
+                </td>
 
-
-        </dl>
-
+                <td>
+                    @Html.DisplayFor(model => model.Talk.Topic)
+                </td>
+            </tr>
+        </table>
+    </div>
         <form method="post">
             <input type="hidden" asp-for="Talk.TalkID" />
             <input type="submit" value="Delete" class="btn btn-default" /> |

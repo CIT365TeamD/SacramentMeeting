@@ -10,6 +10,10 @@ body {
 }
 h2 {
     margin-top: 0;
+    font-size:x-large;
+}
+h3 {
+    font-size: large;
 }
 /* Links */
 a, a:link, a:visited {
@@ -163,8 +167,8 @@ header a:hover {
     font-size: medium;
     text-align: center;
     display: block;
-    margin-top: -30px;
-    margin-bottom: 20px;
+    margin-top: -35px;
+    margin-bottom: 15px;
     line-height: 1em;
 }
 
