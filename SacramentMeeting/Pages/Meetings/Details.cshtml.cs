@@ -19,6 +19,7 @@ namespace SacramentMeeting.Pages.Meetings
         }
 
         public Meeting Meeting { get; set; }
+        public List<CurrentCalling> Callings { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -43,6 +44,11 @@ namespace SacramentMeeting.Pages.Meetings
             {
                 return NotFound();
             }
+            Callings = await _context.CurrentCalling
+                .Include(m => m.Calling)
+                .Include(m => m.Member)
+                .AsNoTracking()
+                .ToListAsync();
             return Page();
         }
     }

@@ -23,11 +23,21 @@
         </tr>
         <tr>
             <td>Choirister</td>
-            <td >GET NAME OF CHORISTER</td>
+            <td >@foreach (var item in Model.Callings)
+                {
+                if (item.Calling.Title.ToString().Contains("Choirister"))
+                    { @Html.DisplayFor(model => item.Member.FullName)}
+            }</td>
         </tr>
         <tr>
             <td>Organist</td>
-            <td >GET NAME OF ORGANIST</td>
+            <td>
+                @foreach (var item in Model.Callings)
+                {
+                    if (item.Calling.Title.ToString().Contains("Organist"))
+                    {@Html.DisplayFor(model => item.Member.FullName)}
+            }
+                    </td>
         </tr>
         <tr></tr>
         <tr>

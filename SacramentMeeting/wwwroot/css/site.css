@@ -5,8 +5,19 @@ body {
     padding-bottom: 20px;
 }
 
+.navbar-inverse {
+    background-color: rgb(232, 232, 232);
+    border: none;
+}
+header a:hover {
+    color: black;
+    text-decoration: none;
+}
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
+a, a:link, a:visited {
+    color: mediumseagreen;
+}
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
@@ -19,4 +30,166 @@ body {
 .detail #center {
 
 }
+.navbar-inverse .navbar-toggle {
+    border-color: #bfbfbf;
+}
+.navbar-collapse .navbar-toggle {
+    color: rgb(232, 232, 232);
+    border-color: #bfbfbf;
+}
+.navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
+    background-color: #bfbfbf;
+}
+.navbar-inverse .navbar-nav > li > a {
+    color: #333333;
+}
+.navbar-inverse .navbar-nav > li > a:hover {
+    color: #939393;
+}
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+    border-color: #bfbfbf;
+}
+.navbar-inverse .navbar-nav > li > a:active {
+        color: #ffffff;
+    }
+.img-box {
+    position: relative;
+}
+.main-img {
+    width: 100%;
+}
+.img-box h4 {
+    display: none;
+}
+.index-buttons {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: space-between;
+    margin-top: 20px;
+    flex-direction: column;
+    align-items:flex-start;
+    height: 210px;
+}
+.index-form div p {
+    display: flex;
+    flex-direction:column;
+    align-items: flex-start;
+}
+.index-form div p span {
+    padding: 5px 0;
+}
 
+.title {
+    font-weight: 600;
+}
+.index-input {
+    padding: 4px 0;
+    width: 133px;
+}
+
+form .btn {
+    margin-top: -1px;
+}
+.btn-default, .btn-default:link, .btn-default:visited {
+    height: 35px;
+    border-color: green;
+    background-color: #98b198;
+    color: black;
+}
+.btn-default:hover .btn-default:focus {
+    background-color: #ffffff;
+    border-color: green;
+}
+.btn-default:active {
+    background-color:darkseagreen;
+    border-color: green;
+
+}
+.navbar-nav {
+    margin: 0 auto;
+    float: none;
+}
+.logo, .logo:link, .logo:visited {
+    color: black;
+    font-size: xx-large;
+    text-align: center;
+    display: block;
+    margin-top: -30px;
+    margin-bottom: 20px;
+    line-height: 1em;
+}
+@media all and (min-width: 500px)
+{
+    .img-box h4 {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        display: block;
+        width: 50%;
+        padding: 20px;
+        border-radius: 2px;
+        background-color: rgba(255, 255, 255, 0.8);
+        font-size: medium;
+
+    }
+    
+
+}
+@media all and (min-width: 600px) {
+    .img-box h4 {
+        font-size: large;
+    }
+    .index-buttons {
+        flex-direction: column;
+        align-items: flex-start;
+        height: 100px;
+    }
+
+    .index-form div p {
+        flex-direction: row;
+        align-items: center;
+    }
+
+        .index-form div p span {
+            padding: 0 5px;
+        }
+    
+}
+@media all and (min-width: 768px) {
+    .navbar-collapse.collapse {
+        display: flex !important;
+    }
+    .img-box h4 {
+        bottom: 30px;
+        left: 30px;
+        width: 40%;
+    }
+    .index-buttons {
+        flex-direction: row;
+        align-items: flex-start;
+        height: auto;
+    }
+
+    .index-form div p {
+        flex-direction: row;
+        align-items: center;
+    }
+
+        .index-form div p span {
+            padding: 0 5px;
+        }
+}
+@media all and (min-width: 992px) {
+    .img-box h4 {
+        bottom: 10%;
+        left: 10%;
+        width: 30%;
+        font-size: x-large;
+    }
+    .index-buttons {
+        justify-content:flex-start;
+    }
+    .index-form {
+        margin-left: 20px;
+    }
+}

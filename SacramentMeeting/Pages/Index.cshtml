@@ -4,16 +4,43 @@
     ViewData["Title"] = "Home page";
 }
 <main class="home">
+    <div class="img-box">
+        <img class="main-img" src="~/images/christ-teaching.png" alt="Christ teaching" />
+
+        <h4>
+            That thou mayest more fully keep thyself unspotted from the world,
+            thou shalt go to the house of prayer and offer up thy sacraments upon my holy day. D&C&nbsp;59:9
+        </h4>
+    </div>
+    <section>
+        <h3>Planning Sacrament Meeting</h3>
 
 
-    <h2>Sacrament Meeting Planner</h2>
-    <h4>That thou mayest more fully keep thyself unspotted from the world, 
-    thou shalt go to the house of prayer and offer up thy sacraments upon my holy day. D&C 59:9</h4>
+        <p>
+            Sacrament meetings are focused on deepening conversion to Heavenly
+            Father and the Lord Jesus Christ and strengthening faith in Them.<br /> Allowing the ordinance
+            of the sacrament to be the sacred center of members’ worship on the Sabbath requires careful
+            planning, including minimal announcements and consideration of speakers, hymns, and musical
+            numbers.
+        </p>
+        <div class="index-buttons">
+            <a asp-page="Meetings/Create" class="btn btn-default">New Meeting</a>
 
-    <p>Sacrament meetings last 60 minutes and are focused on deepening conversion to Heavenly 
-    Father and the Lord Jesus Christ and strengthening faith in Them. Allowing the ordinance 
-    of the sacrament to be the sacred center of members’ worship on the Sabbath requires careful 
-    planning, including minimal announcements and consideration of speakers, hymns, and musical 
-    numbers. Ward choirs may participate as local circumstances allow. Sacrament meetings begin 
-    and end with a hymn and prayer. A hymn also precedes the blessing of the sacrament.</p>
+
+            <form asp-page="Meetings/Index" method="get" class="index-form">
+                <div class="form-actions no-color">
+                    <p>
+                        <span class="title">Find Meeting:</span>
+                        
+                    <span>
+                        Start Date <input type="date" name="startDate" class="index-input" id="startDate"  required /> 
+                        </span>
+                    <span>End Date <input type="date" class="index-input" name="endDate" /></span>
+                      <input type="submit" value="Search" class="btn btn-default" />
+
+                    </p>
+                </div>
+            </form>
+        </div>
+    </section>
 </main>

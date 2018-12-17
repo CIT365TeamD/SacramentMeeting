@@ -19,11 +19,50 @@ namespace SacramentMeeting.Pages.Meetings
         }
 
         public IList<Meeting> Meeting { get;set; }
-        public IList<Member> Member { get; set; }
+        public DateTime CurrentStart { get; set; }
+        public DateTime CurrentEnd { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(DateTime? startDate, DateTime? endDate)
         {
-            Meeting = await _context.Meeting
+            //if (startDate.HasValue)
+            //{
+            //    CurrentStart = startDate.Value;
+            //}
+            //if (endDate.HasValue)
+            //{
+                
+            //    CurrentEnd = endDate.Value;
+            //    if (CurrentEnd < CurrentStart)
+            //    {
+            //        CurrentEnd = CurrentStart.AddYears(1);
+            //    }
+            //}
+            
+            IQueryable<Meeting> meetings = from m in _context.Meeting
+                                           select m;
+
+            // if both startDate and EndDate supplied
+            if (startDate.HasValue && endDate.HasValue)
+            {
+                
+                CurrentStart = startDate.Value;
+                CurrentEnd = endDate.Value;
+                // if end date is before start date, change end date to one year after start date;
+                if (CurrentStart > CurrentEnd)
+                {
+                    CurrentEnd = CurrentStart.AddYears(1);
+                }
+                 
+                meetings = meetings.Where(m => m.MeetingDate >= CurrentStart && m.MeetingDate <= CurrentEnd);
+            }
+            else if (startDate.HasValue)
+            {
+                CurrentStart = startDate.Value;
+                
+
+                meetings = meetings.Where(m => m.MeetingDate >= CurrentStart);
+            }
+            Meeting = await meetings
                 .Include(m => m.Calling)
                     .ThenInclude(m => m.CurrentCallings)
                         .ThenInclude(m => m.Member)
