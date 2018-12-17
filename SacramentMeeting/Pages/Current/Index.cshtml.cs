@@ -28,4 +28,5 @@ namespace SacramentMeeting.Pages.Current
                 .ToListAsync();
         }
     }
+
 }
