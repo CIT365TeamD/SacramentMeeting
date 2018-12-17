@@ -52,7 +52,16 @@ namespace SacramentMeeting.Data
                 new Calling{Title="Organist",Organization=Organizations.Music,CallingGender=GenderCl.Both},
                 new Calling{Title="Choirister",Organization=Organizations.Music,CallingGender=GenderCl.Both},
                 new Calling{Title="2nd Counselor",Organization=Organizations.Young_Men,CallingGender=GenderCl.Male},
-                new Calling{Title="President",Organization=Organizations.Young_Men,CallingGender=GenderCl.Male}
+                new Calling{Title="President",Organization=Organizations.Young_Men,CallingGender=GenderCl.Male},
+                new Calling{Title="1st Counselor",Organization=Organizations.Young_Men,CallingGender=GenderCl.Male},
+                new Calling{Title="2nd Counselor",Organization=Organizations.Primary,CallingGender=GenderCl.Female},
+                new Calling{Title="2nd Counselor",Organization=Organizations.Young_Women,CallingGender=GenderCl.Female},
+                new Calling{Title="President",Organization=Organizations.Primary,CallingGender=GenderCl.Female},
+                new Calling{Title="President",Organization=Organizations.Young_Women,CallingGender=GenderCl.Female},
+                new Calling{Title="1st Counselor",Organization=Organizations.Young_Women,CallingGender=GenderCl.Female},
+                new Calling{Title="1st Counselor",Organization=Organizations.Primary,CallingGender=GenderCl.Female},
+                new Calling{Title="Teacher 8yr Olds",Organization=Organizations.Primary,CallingGender=GenderCl.Both},
+                new Calling{Title="Teacher 7yr Old",Organization=Organizations.Primary,CallingGender=GenderCl.Both},
             };
             foreach (Calling c in callings)
             {
