@@ -12,22 +12,26 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="CurrentCalling.CallingID" class="control-label"></label>
-                <select asp-for="CurrentCalling.CallingID" class ="form-control" asp-items="ViewBag.CallingID"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="CurrentCalling.MemberID" class="control-label"></label>
-                <select asp-for="CurrentCalling.MemberID" class ="form-control" asp-items="ViewBag.MemberID"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="CurrentCalling.DateCalled" class="control-label"></label>
-                <input asp-for="CurrentCalling.DateCalled" class="form-control" />
-                <span asp-validation-for="CurrentCalling.DateCalled" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+            @if (Model.Message != null)
+            {<p class="text-danger">@Model.Message</p>}
+            <div class="form-half">
+                <fieldset class="half">
+                    <div class="form-group">
+                        <label asp-for="CurrentCalling.CallingID" class="control-label"></label>
+                        <select asp-for="CurrentCalling.CallingID" class="form-control" asp-items="ViewBag.CallingID"></select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CurrentCalling.MemberID" class="control-label"></label>
+                        <select asp-for="CurrentCalling.MemberID" class="form-control" asp-items="ViewBag.MemberID"></select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CurrentCalling.DateCalled" class="control-label"></label>
+                        <input asp-for="CurrentCalling.DateCalled" class="form-control" />
+                        <span asp-validation-for="CurrentCalling.DateCalled" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
         </form>
     </div>
 </div>

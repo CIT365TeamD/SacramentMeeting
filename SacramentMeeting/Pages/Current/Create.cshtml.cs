@@ -20,13 +20,15 @@ namespace SacramentMeeting.Pages.Current
 
         public IActionResult OnGet()
         {
-        ViewData["CallingID"] = new SelectList(_context.Calling, "CallingID", "Title");
-        ViewData["MemberID"] = new SelectList(_context.Member, "ID", "FullName");
+        ViewData["CallingID"] = new SelectList(_context.Calling, "CallingID", "Title", "CallingGender");
+        ViewData["MemberID"] = new SelectList(_context.Member, "ID", "FullName", "MembersGender");
             return Page();
         }
 
         [BindProperty]
         public CurrentCalling CurrentCalling { get; set; }
+        public Calling Calling { get; set; }
+        public string Message { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -34,6 +36,13 @@ namespace SacramentMeeting.Pages.Current
             {
                 return Page();
             }
+            //Calling = await _context.Calling.FirstOrDefaultAsync(m => m.CallingID = CurrentCalling.CallingID);
+
+            //if (Calling.CallingGender != GenderCl.Both && Calling.CallingGender != Member.MembersGender)
+            //{
+            //    Message = "Member is wrong gender for this calling.";
+            //    return Page();
+            //}
 
             _context.CurrentCalling.Add(CurrentCalling);
             await _context.SaveChangesAsync();

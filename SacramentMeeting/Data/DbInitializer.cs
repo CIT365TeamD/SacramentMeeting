@@ -46,13 +46,13 @@ namespace SacramentMeeting.Data
 
             var callings = new Calling[]
             {
-                new Calling{Title="Bishop",Organization=Organizations.Bishopric},
-                new Calling{Title="1st Counselor",Organization=Organizations.Bishopric},
-                new Calling{Title="2nd Counselor",Organization=Organizations.Bishopric},
-                new Calling{Title="Organist",Organization=Organizations.Music},
-                new Calling{Title="Choirister",Organization=Organizations.Music},
-                new Calling{Title="2nd Counselor",Organization=Organizations.Young_Men},
-                new Calling{Title="President",Organization=Organizations.Young_Men}
+                new Calling{Title="Bishop",Organization=Organizations.Bishopric,CallingGender=GenderCl.Male},
+                new Calling{Title="1st Counselor",Organization=Organizations.Bishopric, CallingGender=GenderCl.Male},
+                new Calling{Title="2nd Counselor",Organization=Organizations.Bishopric, CallingGender=GenderCl.Male},
+                new Calling{Title="Organist",Organization=Organizations.Music,CallingGender=GenderCl.Both},
+                new Calling{Title="Choirister",Organization=Organizations.Music,CallingGender=GenderCl.Both},
+                new Calling{Title="2nd Counselor",Organization=Organizations.Young_Men,CallingGender=GenderCl.Male},
+                new Calling{Title="President",Organization=Organizations.Young_Men,CallingGender=GenderCl.Male}
             };
             foreach (Calling c in callings)
             {

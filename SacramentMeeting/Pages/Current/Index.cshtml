@@ -32,7 +32,11 @@
                 @Html.DisplayFor(modelItem => item.DateCalled)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Calling.Title)
+            
+                @Html.DisplayFor(modelItem => item.Calling.Title) - @foreach (var person in item.Calling.CurrentCallings)
+                {@person.Calling.Organization}
+            
+            @*@Html.DisplayFor(modelItem => item.Calling.Title)*@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Member.FullName)

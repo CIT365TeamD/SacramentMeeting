@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SacramentMeeting.Models;
 
 namespace SacramentMeeting.Migrations
 {
     [DbContext(typeof(SacramentMeetingContext))]
-    partial class SacramentMeetingContextModelSnapshot : ModelSnapshot
+    [Migration("20181217153503_calling-gender")]
+    partial class callinggender
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

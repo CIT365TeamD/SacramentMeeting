@@ -25,6 +25,8 @@ namespace SacramentMeeting.Models
         [Display(Name = "Member Name")]
         public Member Member { get; set; }
 
+        public GenderCl CallingGender { get; set; }
+
 
 
     }
