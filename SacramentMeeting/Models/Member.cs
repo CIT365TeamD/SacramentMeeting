@@ -5,9 +5,19 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SacramentMeeting.Models
 {
+
+    public enum Gender
+    {
+        Male, Female
+    }
+
     public class Member
     {
         public int ID { get; set; }
+
+        [Required]
+        [Display(Name = "Gender")]
+        public Gender MembersGender { get; set; }
 
         [Required, Display(Name ="Last Name"), 
             StringLength(50, MinimumLength =2, ErrorMessage ="Last Name must be 2-50 characters."),
@@ -29,5 +39,6 @@ namespace SacramentMeeting.Models
         public ICollection<Talk> Talks { get; set; }
         public ICollection<Prayer> Prayers { get; set; }
         
+
     }
 }

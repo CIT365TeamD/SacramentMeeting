@@ -22,8 +22,11 @@ namespace SacramentMeeting.Pages.Members
         [BindProperty]
         public Member Member { get; set; }
 
+
+        public List<Gender> GendersList;
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            GendersList = Enum.GetValues(typeof(Gender)).Cast<Gender>().ToList();
             if (id == null)
             {
                 return NotFound();
