@@ -5,9 +5,12 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel;
+using System.Reflection;
 
 namespace SacramentMeeting.Models
 {
+    
+
     public enum GenderCl
     {
         Male, Female, Both
@@ -22,7 +25,14 @@ namespace SacramentMeeting.Models
         [Description("Young Women")] Young_Women,
         [Description("Primary")] Primary,
         [Description("Music")] Music
-    }
+
+            
+}
+
+;
+
+    
+
     public class Calling
     {
 
@@ -41,5 +51,17 @@ namespace SacramentMeeting.Models
         public ICollection<CurrentCalling> CurrentCallings { get; set; }
 
         public GenderCl CallingGender { get; set; }
+
+
+        public string Display
+        {
+            get
+            {
+                string[] org = Organization.ToString().Split('_');
+                string organization = string.Join(" ", org);
+                return Title + " - " + organization;
+            }
+        }
     }
+
 }

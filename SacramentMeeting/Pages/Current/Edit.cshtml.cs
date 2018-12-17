@@ -42,10 +42,25 @@ namespace SacramentMeeting.Pages.Current
             return Page();
         }
 
+        public Calling Calling { get; set; }
+        public string Message { get; set; }
+        public Member Member { get; set; }
+
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
+                return Page();
+            }
+
+            Calling = await _context.Calling.FirstOrDefaultAsync(m => m.CallingID == CurrentCalling.CallingID);
+            Member = await _context.Member.FirstOrDefaultAsync(m => m.ID == CurrentCalling.MemberID);
+
+            if (Calling.CallingGender != GenderCl.Both && Calling.CallingGender.ToString() != Member.MembersGender.ToString())
+            {
+                Message = "Member is wrong gender for this calling.";
+                ViewData["CallingID"] = new SelectList(_context.Calling, "CallingID", "Title");
+                ViewData["MemberID"] = new SelectList(_context.Member, "ID", "FullName");
                 return Page();
             }
 

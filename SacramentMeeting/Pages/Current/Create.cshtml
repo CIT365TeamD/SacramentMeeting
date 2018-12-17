@@ -9,7 +9,7 @@
 
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @if (Model.Message != null)
@@ -32,6 +32,8 @@
                     <div class="form-group">
                         <input type="submit" value="Create" class="btn btn-default" />
                     </div>
+                </fieldset>
+            </div>
         </form>
     </div>
 </div>
