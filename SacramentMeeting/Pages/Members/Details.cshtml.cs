@@ -28,7 +28,14 @@ namespace SacramentMeeting.Pages.Members
                 return NotFound();
             }
 
-            Member = await _context.Member.FirstOrDefaultAsync(m => m.ID == id);
+            Member = await _context.Member
+                .Include(m => m.CurrentCallings)
+                    .ThenInclude(m => m.Calling)
+                .Include(m => m.Talks)
+                    .ThenInclude(m => m.Meeting)
+                .Include(m => m.Prayers)
+                    .ThenInclude(m => m.Meeting)
+                .FirstOrDefaultAsync(m => m.ID == id);
 
             if (Member == null)
             {

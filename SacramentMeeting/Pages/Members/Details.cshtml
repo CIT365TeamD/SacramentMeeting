@@ -8,20 +8,14 @@
 <h2>Member Details</h2>
 
 <div>
-
+<div class="col-md-12">
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Member.LastName)
+            @Html.DisplayNameFor(model => model.Member.FullName)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Member.LastName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Member.FirstName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Member.FirstName)
+            @Html.DisplayFor(model => model.Member.FullName)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Member.MembersGender)
@@ -30,6 +24,80 @@
             @Html.DisplayFor(model => model.Member.MembersGender)
         </dd>
     </dl>
+</div>
+    </div>
+<div class="col-md-12">
+    <h4>Callings</h4>
+    <table class="table member-detail">
+        <tr>
+            <th class="t1">Calling</th>
+
+            <th class="t2">Date Called</th>
+            <th></th>
+        </tr>
+        @foreach (var calling in Model.Member.CurrentCallings)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(model => calling.Calling.Display)
+            </td>
+            <td>
+                @Html.DisplayFor(model => calling.DateCalled)
+            </td>
+            <td><a asp-page="../Callings/Details" asp-route-id="@calling.CallingID">Go to Calling</a></td>
+        </tr>
+        <tr></tr>
+        }
+    </table>
+</div>
+<div class="col-md-12">
+    <h4>Talks</h4>
+    <table class="table member-detail">
+        <tr>
+            <th class="t1">Topic</th>
+
+            <th class="t2">Meeting Date</th>
+            <th> </th>
+        </tr>
+        @foreach (var talk in Model.Member.Talks)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => talk.Topic)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => talk.Meeting.MeetingDate)
+                </td>
+                <td><a asp-page="../Meeting/Details" asp-route-id="talk.MeetingID">Go to Meeting</a></td>
+            </tr>
+            <tr></tr>
+        }
+    </table>
+</div>
+<div class="col-md-12">
+    <h4>Prayers</h4>
+    <table class="table member-detail">
+        <tr>
+            <th class="t1">Schedule</th>
+
+            <th class="t2">Meeting Date</th>
+            <th></th>
+        </tr>
+        @foreach (var prayer in Model.Member.Prayers)
+        {
+            <tr>
+                <td>
+                    @prayer.Schedule.ToString() Prayer
+                </td>
+                <td>
+                    @Html.DisplayFor(model => prayer.Meeting.MeetingDate)
+                </td>
+                <td><a asp-page="../Meetings/Details" asp-route-id="prayer.MeetingID">Go to Meeting</a></td>
+            </tr>
+            <tr></tr>
+
+        }
+    </table>
 </div>
 <div>
     <a asp-page="./Edit" asp-route-id="@Model.Member.ID">Edit</a> |

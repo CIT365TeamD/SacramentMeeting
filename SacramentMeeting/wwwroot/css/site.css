@@ -57,7 +57,18 @@ a, a:link, a:visited {
 }
 
 .detail td {
-    width: 40%
+    width: 40%;
+}
+.t1 {
+    width: 50%;
+    
+}
+.t2 {
+    width: 30%;
+}
+.member-detail  {
+    border-bottom: solid lightgray .5px;
+    border-collapse:initial;
 }
 
 .title {
