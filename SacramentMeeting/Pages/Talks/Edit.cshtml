@@ -8,8 +8,7 @@
 <h2>Edit</h2>
 
 <h4>Sacrament Meeting | Talk</h4>
-<hr />
-<div class="col-md-12">
+<div class="col-md-12 meeting-display">
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Meeting.MeetingDate)
@@ -22,7 +21,7 @@
             @Html.DisplayNameFor(model => model.Meeting.Calling)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Meeting.Calling.Title) - @foreach (var item in Model.Meeting.Calling.CurrentCallings)
+            <span class="meeting-title">@Html.DisplayFor(model => model.Meeting.Calling.Title):</span>@foreach (var item in Model.Meeting.Calling.CurrentCallings)
             {@Html.DisplayFor(model => item.Member.FullName)}
         </dd>
         <dd></dd>
@@ -33,7 +32,7 @@
         @foreach (var item in Model.Meeting.Prayers)
         {
             <dd>
-                @item.Schedule Prayer: @item.Member.FullName<br />
+                <span class="meeting-title">@item.Schedule Prayer:</span>@item.Member.FullName<br />
             </dd>
 
         }
@@ -45,7 +44,7 @@
         @foreach (var item in Model.Meeting.SongSelections)
         {
             <dd>
-                @item.Schedule Song: #@item.SongID @item.Song.Title
+                <span class="meeting-title">@item.Schedule Song:</span><span class="meeting-song">#@item.SongID </span>@item.Song.Title
             </dd>
         }
         <dd></dd>
@@ -55,35 +54,38 @@
         @foreach (var item in Model.Meeting.Talks)
         {
             <dd>
-                @item.Member.FullName - Topic: @item.Topic
+                <span class="meeting-title">Speaker:</span>@item.Member.FullName<span class="meeting-speaker">Topic: @item.Topic</span>
             </dd>
         }
     </dl>
-
 </div>
+
 <div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Talk.TalkID" />
-            <input type="hidden" asp-for="Talk.MeetingID" />
-            <div class="form-group">
-                <label asp-for="Talk.MemberID" class="control-label">Member</label>
-                <select asp-for="Talk.MemberID" class="form-control" asp-items="ViewBag.MemberID"></select>
-                <span asp-validation-for="Talk.MemberID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Talk.Topic" class="control-label"></label>
-                <input asp-for="Talk.Topic" class="form-control" />
-                <span asp-validation-for="Talk.Topic" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </form>
+    
+    <div class="col-md-12">
+        <h4>Edit Talk</h4>
+        <div class="col-md-4">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Talk.TalkID" />
+                <input type="hidden" asp-for="Talk.MeetingID" />
+                <div class="form-group">
+                    <label asp-for="Talk.MemberID" class="control-label">Member</label>
+                    <select asp-for="Talk.MemberID" class="form-control" asp-items="ViewBag.MemberID"></select>
+                    <span asp-validation-for="Talk.MemberID" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Talk.Topic" class="control-label"></label>
+                    <input asp-for="Talk.Topic" class="form-control" />
+                    <span asp-validation-for="Talk.Topic" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </form>
+        </div>
     </div>
 </div>
-
 <div>
     <a asp-page="./Details">Back to Talks</a> | 
     <a asp-page="../Meetings/Details" asp-route-id="@Model.Talk.MeetingID">Done</a>

@@ -37,6 +37,10 @@ namespace SacramentMeeting.Pages.Talks
 
             ViewData["MeetingID"] = new SelectList(_context.Meeting, "MeetingID", "MeetingID");
             ViewData["MemberID"] = new SelectList(_context.Member, "ID", "FullName");
+            if (edit != null)
+            {
+                Edit = edit.Value;
+            }
             return Page();
         }
 
@@ -58,16 +62,16 @@ namespace SacramentMeeting.Pages.Talks
                 _context.Talk.Add(newTalk);
                 await _context.SaveChangesAsync();
 
-                if (Edit)
+                if (edit == true)
                 {
-                    return RedirectToPage("../Meetings/Edit", new { id = newTalk.MeetingID });
+                    return RedirectToPage("../Talks/Details", new { id = newTalk.MeetingID });
                 }
                 return RedirectToPage("./Create", new {id = newTalk.MeetingID });
             }
 
-            if (Edit)
+            if (edit == true)
             {
-                return RedirectToPage("../Meetings/Edit", new { id = newTalk.MeetingID });
+                return RedirectToPage("../Talks/Details", new { id = newTalk.MeetingID });
             }
             return RedirectToPage("./Create", new { id = newTalk.MeetingID });
         }
