@@ -38,7 +38,7 @@ namespace SacramentMeeting.Pages.Members
             _context.Member.Add(Member);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Details", new { id = Member.ID });
         }
     }
 }

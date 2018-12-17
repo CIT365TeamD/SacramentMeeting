@@ -5,24 +5,23 @@
     ViewData["Title"] = "Create|Add Talks";
 }
 
-<h2>Create</h2>
+<h2>Add Talks</h2>
 
-<h4>Sacrament Meeting | Add Talks</h4>
-<hr />
-<div class="col-md-12">
+<div class="col-md-12 meeting-display">
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Meeting.MeetingDate)
         </dt>
+        
         <dd>
-            @Html.DisplayFor(model => model.Meeting.MeetingDate)
+           @Html.DisplayFor(model => model.Meeting.MeetingDate)
         </dd>
-
+        <dd></dd>
         <dt>
             @Html.DisplayNameFor(model => model.Meeting.Calling)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Meeting.Calling.Title) - @foreach (var item in Model.Meeting.Calling.CurrentCallings)
+            <span class="meeting-title">@Html.DisplayFor(model => model.Meeting.Calling.Title):</span>@foreach (var item in Model.Meeting.Calling.CurrentCallings)
             {@Html.DisplayFor(model => item.Member.FullName)}
         </dd>
         <dd></dd>
@@ -33,7 +32,7 @@
         @foreach (var item in Model.Meeting.Prayers)
         {
             <dd>
-                @item.Schedule Prayer: @item.Member.FullName<br />
+                <span class="meeting-title">@item.Schedule Prayer:</span>@item.Member.FullName<br />
             </dd>
 
         }
@@ -45,8 +44,8 @@
         @foreach (var item in Model.Meeting.SongSelections)
         {
             <dd>
-                @item.Schedule Song: #@item.SongID @item.Song.Title
-            </dd>
+                <span class="meeting-title">@item.Schedule Song:</span><span class="meeting-song">#@item.SongID </span>@item.Song.Title
+</dd>
         }
         <dd></dd>
         <dt>
@@ -55,18 +54,18 @@
         @foreach (var item in Model.Meeting.Talks)
         {
             <dd>
-                @item.Member.FullName - Topic: @item.Topic
-            </dd>
+                <span class="meeting-title">Speaker:</span>@item.Member.FullName<span class="meeting-speaker">Topic: @item.Topic</span>
+</dd>
         }
     </dl>
 
 </div>
 
 <div class="col-md-12">
-    <hr />
+
     <h4>Add Talk</h4>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-12">
             <form method="post">
                 <input type="hidden" name="Talk.MeetingID" value="@Model.Meeting.MeetingID" />
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>

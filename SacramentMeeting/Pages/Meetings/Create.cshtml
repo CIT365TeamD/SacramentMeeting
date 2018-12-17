@@ -5,99 +5,77 @@
     ViewData["Title"] = "Create Meeting";
 }
 
-<h2>Create</h2>
-
-<h4>Sacrament Meeting</h4>
+<h2>Create Meeting</h2>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-           @if (Model.Message != null)
-           { <p class="text-danger">@Model.Message</p>}
-
-            <div class="form-group">
-                <label asp-for="Meeting.MeetingDate" class="control-label"></label>
-                <input asp-for="Meeting.MeetingDate" class="form-control" />
-                <span asp-validation-for="Meeting.MeetingDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Meeting.Calling.Title" class="control-label">Conducting</label>
-                <select asp-for="Meeting.CallingID" class="form-control" asp-items="@Model.BishopricCallingsSL">
-                    <option value=""> -- Assign --</option>
-                </select>
-                <span asp-validation-for="Meeting.CallingID" class="text-danger"></span>
-
-            </div>
-
-            <div class="form-group">
-                <label for="openingSong" class="control-label">Opening Song</label>
-                <select name="openingSong" class="form-control" asp-items="@Model.OpeningSongSLI">
-                    <option value=""> -- Assign --</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="sacramentSong" class="control-label">Sacrament Song</label>
-                <select name="sacramentSong" class="form-control" asp-items="@Model.SacramentSongSLI">
-                    <option value=""> -- Assign --</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="closingSong" class="control-label">Closing Song</label>
-                <select name="closingSong" class="form-control" asp-items="@Model.ClosingSongSLI">
-                    <option value=""> -- Assign --</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label asp="openingPrayer" class="control-label">Opening Prayer</label>
-                <select name="openingPrayer" class="form-control" asp-items="@Model.OpeningPrayerSLI">
-                    <option value=""> -- Assign --</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="closingPrayer" class="control-label">Closing Prayer</label>
-                <select name="closingPrayer" class="form-control" asp-items="@Model.ClosingPrayerSLI">
-                    <option value=""> -- Assign --</option>
-                </select>
-            </div>
-            <!--<div class="form-group">
-                        <label for="talks" class="control-label">Talk</label>
-                        <select name="talks" class="form-control" asp-items="">
-                            <option value=""> -- Assign --</option>
-                        </select>
-
-
-                        <label for="topics" class="control-label">Topic</label>
-                        <input name="topics" class="form-control" />
-                        <span class="text-danger"></span>
+            @if (Model.Message != null)
+            {<p class="text-danger">@Model.Message</p>}
+            <div class="form-half">
+                <fieldset class="half">
+                    <div class="form-group">
+                        <label asp-for="Meeting.MeetingDate" class="control-label"></label>
+                        <input asp-for="Meeting.MeetingDate" class="form-control" />
+                        <span asp-validation-for="Meeting.MeetingDate" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label for="talks" class="control-label">Talk</label>
-                        <select name="talks" class="form-control" asp-items="">
+                        <label asp-for="Meeting.Calling.Title" class="control-label">Conducting</label>
+                        <select asp-for="Meeting.CallingID" class="form-control" asp-items="@Model.BishopricCallingsSL">
                             <option value=""> -- Assign --</option>
                         </select>
+                        <span asp-validation-for="Meeting.CallingID" class="text-danger"></span>
 
-                        <label for="topics" class="control-label">Topic</label>
-                        <input name="topics" class="form-control" />
-                        <span class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Create" class="btn btn-default" />
+                        <label asp="openingPrayer" class="control-label">Opening Prayer</label>
+                        <select name="openingPrayer" class="form-control" asp-items="@Model.OpeningPrayerSLI">
+                            <option value=""> -- Assign --</option>
+                        </select>
                     </div>
-                </form>
-            </div>
-        </div>-->
-            <div class="form-group">
+                    <div class="form-group">
+                        <label for="closingPrayer" class="control-label">Closing Prayer</label>
+                        <select name="closingPrayer" class="form-control" asp-items="@Model.ClosingPrayerSLI">
+                            <option value=""> -- Assign --</option>
+                        </select>
+                    </div>
+                </fieldset>
+                <fieldset class="half">
+                    <div class="form-group">
+                        <label for="openingSong" class="control-label">Opening Song</label>
+                        <select name="openingSong" class="form-control" asp-items="@Model.OpeningSongSLI">
+                            <option value=""> -- Assign --</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sacramentSong" class="control-label">Sacrament Song</label>
+                        <select name="sacramentSong" class="form-control" asp-items="@Model.SacramentSongSLI">
+                            <option value=""> -- Assign --</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="closingSong" class="control-label">Closing Song</label>
+                        <select name="closingSong" class="form-control" asp-items="@Model.ClosingSongSLI">
+                            <option value=""> -- Assign --</option>
+                        </select>
+                    </div>
 
-                <input type="submit" value="Next" class="btn btn-default" />
+
+
+                    <div class="form-group  form-next">
+                        
+                        <input type="submit" value="Next" class="btn btn-default" />
+                    </div>
+                </fieldset>
             </div>
         </form>
         <div>
+            
             <a asp-page="Index">Back to List</a>
         </div>
     </div>
-   
-</div>
+   </div>
     @section Scripts {
         @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     }

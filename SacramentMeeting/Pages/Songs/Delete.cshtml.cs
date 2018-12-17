@@ -28,7 +28,10 @@ namespace SacramentMeeting.Pages.Songs
                 return NotFound();
             }
 
-            Song = await _context.Song.FirstOrDefaultAsync(m => m.SongID == id);
+            Song = await _context.Song
+                .Include(m => m.SongSelections)
+                    .ThenInclude(m => m.Meeting)
+                .FirstOrDefaultAsync(m => m.SongID == id);
 
             if (Song == null)
             {
@@ -44,10 +47,17 @@ namespace SacramentMeeting.Pages.Songs
                 return NotFound();
             }
 
-            Song = await _context.Song.FindAsync(id);
+            Song = await _context.Song
+                .Include(m => m.SongSelections)
+                    .ThenInclude(m => m.Meeting)
+                .FirstOrDefaultAsync(m => m.SongID == id);
 
             if (Song != null)
             {
+                foreach (var item in Song.SongSelections)
+                {
+                    _context.SongSelection.Remove(item);
+                }
                 _context.Song.Remove(Song);
                 await _context.SaveChangesAsync();
             }

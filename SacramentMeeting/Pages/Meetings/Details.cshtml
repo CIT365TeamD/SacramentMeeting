@@ -2,10 +2,10 @@
 @model SacramentMeeting.Pages.Meetings.DetailsModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Meeting Details";
 }
 
-<h2>Details</h2>
+<h2>Meeting Details</h2>
 
 <div>
 
@@ -74,26 +74,21 @@
             <td >Administration of the Sacrament </td>
             <td>Aaronic Priesthood</td>
         </tr>
-        <tr>
-
-            <th>Speakers</th>
-            <th>Topic</th>
-        </tr>
+        
         @foreach (var item in Model.Meeting.Talks)
         {
             <tr>
-
-                <td>@Html.DisplayFor(model => item.Member.FullName)</td>
-                <td>@Html.DisplayFor(Model => item.Topic)</td>
+                <td>Speaker</td>
+                <td>@Html.DisplayFor(model => item.Member.FullName) - Topic: @Html.DisplayFor(Model => item.Topic)</td>
             </tr>
         }
         <tr>
             <td>Closing Hymn</td>
-            <td ">
+            <td >
                 @foreach (var item in Model.Meeting.SongSelections)
                 {
                     @if (item.Schedule.ToString().Contains("Closing"))
-                    {@Html.DisplayFor(model => item.Song.Display)}
+                 {@Html.DisplayFor(model => item.Song.Display)}
                 }
             </td>
         </tr>
@@ -113,6 +108,6 @@
 
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Meeting.MeetingID" asp-route-editsss="true">Edit</a> |
+    <a asp-page="./Edit" asp-route-id="@Model.Meeting.MeetingID" asp-route-edit="true">Edit</a> |
     <a asp-page="./Index">Back to List</a>
 </div>

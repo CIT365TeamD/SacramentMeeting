@@ -6,17 +6,23 @@ body {
 }
 
 .navbar-inverse {
-    background-color: rgb(232, 232, 232);
+    background-color: #E7EFEC;
     border: none;
 }
 header a:hover {
     color: black;
     text-decoration: none;
 }
+.form-next {
+    margin-top: 40px;
+}
+.down20 {
+    margin-top: 20px;
+}
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 a, a:link, a:visited {
-    color: mediumseagreen;
+    color: rgb(106, 144, 131);
 }
 .body-content {
     padding-left: 15px;
@@ -31,20 +37,20 @@ a, a:link, a:visited {
 
 }
 .navbar-inverse .navbar-toggle {
-    border-color: #bfbfbf;
+    border-color: rgb(179, 198, 191);
 }
 .navbar-collapse .navbar-toggle {
-    color: rgb(232, 232, 232);
+    color: rgb(179, 198, 191);
     border-color: #bfbfbf;
 }
 .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
-    background-color: #bfbfbf;
+    background-color: rgb(179, 198, 191);
 }
 .navbar-inverse .navbar-nav > li > a {
     color: #333333;
 }
 .navbar-inverse .navbar-nav > li > a:hover {
-    color: #939393;
+    color: rgb(106, 144, 131);
 }
 .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
     border-color: #bfbfbf;
@@ -52,8 +58,13 @@ a, a:link, a:visited {
 .navbar-inverse .navbar-nav > li > a:active {
         color: #ffffff;
     }
+h2 {
+    margin-top: 0;
+}
 .img-box {
     position: relative;
+    max-height: 350px;
+    overflow: hidden;
 }
 .main-img {
     width: 100%;
@@ -92,23 +103,25 @@ form .btn {
 }
 .btn-default, .btn-default:link, .btn-default:visited {
     height: 35px;
-    border-color: green;
-    background-color: #98b198;
+    border-color: rgb(179, 198, 191);
+    background-color: #E7EFEC;
     color: black;
 }
-.btn-default:hover .btn-default:focus {
-    background-color: #ffffff;
-    border-color: green;
-}
-.btn-default:active {
-    background-color:darkseagreen;
-    border-color: green;
-
-}
+    .btn-default:hover, .btn-default:focus {
+        background-color: #ffffff;
+        border-color: rgb(106, 144, 131);
+        color: rgb(106, 144, 131);
+    }
+    .btn-default:active {
+        background-color: rgb(106, 144, 131);
+        border-color: #ffffff;
+    }
 .navbar-nav {
     margin: 0 auto;
     float: none;
 }
+
+
 .logo, .logo:link, .logo:visited {
     color: black;
     font-size: xx-large;
@@ -118,6 +131,36 @@ form .btn {
     margin-bottom: 20px;
     line-height: 1em;
 }
+
+.meeting-display {
+    background-color: #E7EFEC;
+    padding: 5px;
+    padding-left: 25px;
+}
+.meeting-title {
+    width: 130px;
+    display: inline-block;
+}
+.meeting-song {
+    width: 40px;
+    display: inline-block;
+}
+.meeting-speaker {
+    margin-left: 15px;
+
+}
+.meeting-display dd {
+    min-height: 10px;
+    
+}
+.song-display {
+    float: left;
+    padding-right: 10px;
+}
+.done-link {
+    margin-top: 10px;
+}
+
 @media all and (min-width: 500px)
 {
     .img-box h4 {
@@ -131,6 +174,16 @@ form .btn {
         background-color: rgba(255, 255, 255, 0.8);
         font-size: medium;
 
+    }
+    .form-half {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .half {
+        width: 45%;
+        min-width: 250px;
     }
     
 
@@ -177,6 +230,12 @@ form .btn {
 
         .index-form div p span {
             padding: 0 5px;
+        }
+        .meeting-display {
+            padding-left: 5px;
+        }
+
+
         }
 }
 @media all and (min-width: 992px) {
